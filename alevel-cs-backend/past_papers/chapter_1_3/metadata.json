@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1760143605236,
+    "title": "1- lossless compression",
+    "question": "/past_papers/chapter_1_3/question_1760143605175.png",
+    "answer": "/past_papers/chapter_1_3/answer_1760143605203.png",
+    "markScheme": "• Run-length encoding\r\n• Replace sequences of the same colour pixel\r\n• … with colour code and number of identical pixels"
+  },
+  {
+    "id": 1760143866666,
+    "title": "2- compresses",
+    "question": "/past_papers/chapter_1_3/question_1760143866611.png",
+    "answer": "/past_papers/chapter_1_3/answer_1760143866647.png",
+    "markScheme": "Reduces the file size\r\nFaster to transmit/download\r\nOriginal file is too large for email storage/attachment"
+  },
+  {
+    "id": 1760143987218,
+    "title": "3 lossless compression",
+    "question": "/past_papers/chapter_1_3/question_1760143987168.png",
+    "answer": "/past_papers/chapter_1_3/answer_1760143987184.png",
+    "markScheme": "Reduce amplitude to only the range used\r\n limited amplitudes mean fewer bits per sample\r\nRun-length-encoding\r\n… Where consecutive sounds are the same record the binary value of the\r\nsound and number of times it repeats\r\nRecord the changes instead of the actual sounds"
+  }
+]

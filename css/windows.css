@@ -1,0 +1,209 @@
+/* ====================== windows.css - 弹窗专用样式 ====================== */
+
+/* 弹窗内容区域 */
+.window-content {
+    width: 100%;
+    height: calc(100% - 44px); /* 44px 是 header 高度 */
+    display: flex;
+}
+
+/* 右下角缩放手柄 */
+.resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, transparent 50%, #ccc 50%);
+    cursor: se-resize;
+}
+
+/* ====================== 视频窗口左侧边栏 ====================== */
+.video-sidebar {
+    width: 220px;
+    background: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+    padding: 1rem;
+    overflow-y: auto;
+}
+.video-sidebar button {
+    display: block;
+    width: 100%;
+    padding: 0.9rem;
+    margin-bottom: 0.6rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.video-sidebar button:hover,
+.video-sidebar button.active {
+    background: #0066cc;
+    color: white;
+}
+.video-sidebar .practice-side-btn {
+    margin-top: 10px;
+    background: #00ff41 !important;
+    color: #000 !important;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+/* ====================== 视频主区域 + 数字人分栏 ====================== */
+.video-main-split {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+.video-player {
+    flex: 2.5;
+    position: relative;
+    height: 100%;
+    background: #000;
+}
+.video-player iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Practice 跳动按钮（浮在视频右下角） */
+.practice-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+    background: #00ff41;
+    color: #000;
+    font-weight: bold;
+    font-family: monospace;
+    padding: 14px 32px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 25px #00ff4188;
+    user-select: none;
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%   { box-shadow: 0 0 25px #00ff4188; }
+    50%  { box-shadow: 0 0 35px #00ff41cc; }
+    100% { box-shadow: 0 0 25px #00ff4188; }
+}
+
+/* ====================== 数字人导师右侧聊天区（通用，所有章节生效） ====================== */
+.coach-avatar-container {
+    flex: 1;
+    background: #e9eff6;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #ddd;
+    min-width: 280px;
+}
+.avatar-box {
+    text-align: center;
+    margin-bottom: 0.8rem;
+}
+.avatar-box img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #0066cc;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    object-fit: cover;
+    transition: transform 0.1s ease-out;
+}
+
+/* 关键修复：使用属性选择器，完美支持 1.1 1.2 2.1 等所有带点的 id */
+[class^="chat-log-video-"],
+[id^="chat-log-video-"] {
+    flex-grow: 1;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.8rem;
+    overflow-y: auto;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    min-height: 200px;
+    max-height: calc(100% - 180px);
+}
+
+/* 聊天消息气泡 */
+.chat-message {
+    margin-bottom: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 18px;
+    line-height: 1.5;
+    max-width: 85%;
+    word-wrap: break-word;
+}
+.chat-user {
+    background: #d4edda;
+    color: #155724;
+    align-self: flex-end;
+    margin-left: 20%;
+    border-bottom-right-radius: 4px;
+}
+.chat-ai {
+    background: #cce5ff;
+    color: #004085;
+    align-self: flex-start;
+    margin-right: 20%;
+    border-bottom-left-radius: 4px;
+}
+
+/* 输入框 */
+.chat-input-controls {
+    display: flex;
+    margin-top: 8px;
+}
+.chat-input-controls input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    font-size: 0.95rem;
+}
+.chat-input-controls input:focus {
+    border-color: #0066cc;
+}
+.chat-input-controls button {
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    padding: 0 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.chat-input-controls button:hover {
+    background: #0055aa;
+}
+
+/* 视频窗口右下角做笔记按钮 */
+.floating-note-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s;
+}
+
+.floating-note-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+}

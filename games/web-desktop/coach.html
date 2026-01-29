@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Bit's Boot Camp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --board-bg: #2d3436;
+            --board-frame: #5d4037;
+            --chalk-white: #f1f2f6;
+            --chalk-yellow: #ffeaa7;
+            --chalk-red: #ff7675;
+            --bg-wall: #dfe6e9;
+        }
+
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: var(--bg-wall);
+            background-image: radial-gradient(#b2bec3 10%, transparent 10%);
+            background-size: 20px 20px; /* 类似教室墙纸 */
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .classroom {
+            display: flex;
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            gap: 20px;
+        }
+
+        /* === 左侧：教练区域 === */
+        .coach-area {
+            flex: 0 0 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+        }
+
+        .coach-avatar {
+            width: 280px;
+            height: 280px;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            z-index: 2;
+        }
+
+        /* 教练的气泡框 */
+        .speech-bubble {
+            position: absolute;
+            top: 10%;
+            background: #fff;
+            border-radius: 30px;
+            padding: 20px;
+            width: 280px;
+            min-height: 100px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3rem;
+            line-height: 1.4;
+            color: #333;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.5s;
+            border: 2px solid #333;
+            z-index: 3;
+        }
+        
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px; left: 50%;
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: #333 transparent transparent;
+            transform: translateX(-50%);
+        }
+        
+        .speech-bubble.show { opacity: 1; transform: translateY(0); }
+
+        /* 教练讲台 */
+        .podium {
+            width: 100%;
+            height: 120px;
+            background: #8d6e63;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 10px solid #5d4037;
+            box-shadow: inset 0 -20px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+            margin-top: -40px;
+        }
+
+        /* === 右侧：黑板区域 === */
+        .blackboard-container {
+            flex: 1;
+            background: var(--board-frame);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blackboard {
+            background-color: #2b3a42; /* 黑板绿 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            flex: 1;
+            border-radius: 5px;
+            border: 2px solid #444;
+            padding: 30px;
+            color: var(--chalk-white);
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* 粉笔字样式 */
+        .chalk-title {
+            color: var(--chalk-yellow);
+            font-size: 2.5rem;
+            text-align: center;
+            border-bottom: 2px dashed rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .feedback-log {
+            flex: 1;
+            font-size: 1.5rem;
+            color: #aaddff;
+            margin-bottom: 20px;
+            border-left: 3px solid rgba(255,255,255,0.2);
+            padding-left: 15px;
+        }
+
+        /* 输入区 */
+        .input-area {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        textarea {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            padding: 10px;
+            border-radius: 5px;
+            resize: none;
+            outline: none;
+            height: 80px;
+        }
+        
+        textarea::placeholder { color: rgba(255,255,255,0.4); }
+        textarea:focus { background: rgba(255,255,255,0.15); border-color: var(--chalk-yellow); }
+
+        button {
+            background: var(--chalk-yellow);
+            color: #333;
+            border: none;
+            padding: 0 30px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.2s;
+            transform: rotate(-2deg);
+        }
+        
+        button:hover { transform: rotate(0deg) scale(1.05); box-shadow: 0 0 15px var(--chalk-yellow); }
+
+        /* === 动画类 === */
+        .shake { animation: shake 0.5s; }
+        .bounce { animation: bounce 0.6s infinite alternate; }
+        
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-5deg); }
+            50% { transform: translateX(10px) rotate(5deg); }
+            75% { transform: translateX(-10px) rotate(-5deg); }
+            100% { transform: translateX(0); }
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
+        }
+
+        /* 进度指示器 (板擦) */
+        .eraser {
+            position: absolute;
+            bottom: 20px; right: 20px;
+            width: 80px; height: 40px;
+            background: linear-gradient(#333, #111);
+            border-bottom: 8px solid #eee;
+            border-radius: 5px;
+            box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
+            transform: rotate(10deg);
+            cursor: pointer;
+        }
+        .eraser:hover { transform: rotate(0deg); }
+
+    </style>
+</head>
+<body>
+
+<div class="classroom">
+    
+    <div class="coach-area">
+        <div class="speech-bubble show" id="bubble">
+            Welcome to class! Ready to sweat some bits?
+        </div>
+        <img id="coach-img" class="coach-avatar" src="https://api.dicebear.com/9.x/avataaars/svg?seed=MrBit&clothing=collarAndSweater&eyes=default&mouth=smile" alt="Coach">
+        <div class="podium">
+            <div style="text-align:center; color:rgba(255,255,255,0.3); padding-top:10px; font-family:'Patrick Hand';">MR. BIT</div>
+        </div>
+    </div>
+
+    <div class="blackboard-container">
+        <div class="blackboard">
+            <div class="chalk-title" id="chapter-title">Topic: 1.1 Data Representation</div>
+            
+            <div class="question-text" id="q-display">
+                Question Loading...
+            </div>
+
+            <div class="feedback-log" id="feedback-log">
+                </div>
+
+            <div class="input-area">
+                <textarea id="user-input" placeholder="Write your answer here with chalk..."></textarea>
+                <button onclick="checkAnswer()">Submit</button>
+            </div>
+        </div>
+        <div class="eraser" title="Skip Question" onclick="nextQuestion()"></div>
+    </div>
+
+</div>
+
+<script>
+    // === 1. 题目数据结构 (包含评分标准) ===
+    const curriculum = [
+        {
+            id: 1,
+            topic: "1.1.1 Binary Integers",
+            q: "Explain why a computer uses the binary system to represent data.",
+            // 关键词库：必须包含的词根
+            keywords: ["switch", "on", "off", "voltage", "transistor", "circuit", "two states"],
+            // 满分答案
+            perfect: "Computers consist of billions of transistors acting as switches. These switches only have two states: ON (1) or OFF (0), making binary the most reliable way to represent data physically.",
+            // 智能提示：如果缺了某个词，怎么提示
+            hints: {
+                "switch": "Think about the physical hardware. What tiny component acts like a light switch?",
+                "two states": "How many states does a switch have?",
+                "voltage": "In terms of electricity, how do we distinguish 1 and 0?"
+            }
+        },
+        {
+            id: 2,
+            topic: "1.3.2 Von Neumann",
+            q: "Describe the function of the Program Counter (PC) in the Fetch-Execute cycle.",
+            keywords: ["address", "next", "instruction", "memory", "increment"],
+            perfect: "The PC holds the memory address of the NEXT instruction to be fetched. After the fetch, its value is incremented to point to the subsequent instruction.",
+            hints: {
+                "address": "Does it hold the data itself, or where the data is?",
+                "next": "Is it the current instruction or the one coming up?",
+                "increment": "What happens to the PC after the fetch is done?"
+            }
+        },
+        {
+            id: 3,
+            topic: "1.5.1 Security",
+            q: "Explain the difference between Phishing and Pharming.",
+            keywords: ["email", "link", "redirect", "fake", "website", "install", "code", "dns"],
+            perfect: "Phishing uses emails/links to trick users into revealing data. Pharming installs malicious code/corrupts DNS to redirect users to fake websites automatically without clicking links.",
+            hints: {
+                "email": "How does a Phishing attack usually start?",
+                "redirect": "What does Pharming physically do to your browser traffic?",
+                "dns": "Pharming often attacks a specific server system. Which one?"
+            }
+        }
+    ];
+
+    let currentQIndex = 0;
+    let attempts = 0;
+    
+    // === 2. 教练情绪管理 ===
+    const coachImg = document.getElementById('coach-img');
+    const bubble = document.getElementById('bubble');
+    const baseUrl = "https://api.dicebear.com/9.x/avataaars/svg?seed=MrBit&clothing=collarAndSweater";
+
+    // 情绪状态配置
+    const moods = {
+        normal: { url: "&eyes=default&mouth=smile", anim: "" },
+        happy: { url: "&eyes=happy&mouth=smile&eyebrows=raisedExcited", anim: "bounce" },
+        angry: { url: "&eyes=angry&mouth=grimace&eyebrows=angry", anim: "shake" },
+        thinking: { url: "&eyes=wink&mouth=serious", anim: "" },
+        goofy: { url: "&eyes=surprised&mouth=scream&accessories=glasses", anim: "shake" },
+        cool: { url: "&eyes=hearts&mouth=smile&accessories=sunglasses", anim: "bounce" }
+    };
+
+    function setMood(moodName, text) {
+        const m = moods[moodName] || moods.normal;
+        coachImg.src = baseUrl + m.url;
+        
+        // 重置动画
+        coachImg.className = 'coach-avatar';
+        void coachImg.offsetWidth; // 触发重绘
+        if(m.anim) coachImg.classList.add(m.anim);
+
+        // 更新气泡
+        bubble.classList.remove('show');
+        setTimeout(() => {
+            bubble.innerText = text;
+            bubble.classList.add('show');
+        }, 200);
+    }
+
+    // === 3. 游戏逻辑 ===
+
+    function loadQuestion() {
+        const q = curriculum[currentQIndex];
+        document.getElementById('chapter-title').innerText = `Topic: ${q.topic}`;
+        document.getElementById('q-display').innerText = q.q;
+        document.getElementById('feedback-log').innerHTML = "";
+        document.getElementById('user-input').value = "";
+        attempts = 0;
+        setMood('normal', "Let's see what you've got! Read the question carefully.");
+    }
+
+    function checkAnswer() {
+        const input = document.getElementById('user-input').value.toLowerCase();
+        const q = curriculum[currentQIndex];
+        
+        if(input.trim().length < 5) {
+            setMood('goofy', "Are you typing with your elbows? Write a proper sentence!");
+            return;
+        }
+
+        // 1. 分析关键词匹配度
+        let foundKeywords = 0;
+        let missingKeywords = [];
+
+        q.keywords.forEach(k => {
+            if (input.includes(k)) {
+                foundKeywords++;
+            } else {
+                missingKeywords.push(k);
+            }
+        });
+
+        const score = foundKeywords / q.keywords.length;
+        const log = document.getElementById('feedback-log');
+
+        attempts++;
+
+        // 2. 根据分数给反馈
+        if (score >= 0.8) {
+            // 成功
+            setMood('cool', "BOOM! That's textbook perfect! You're ready for the exam.");
+            log.innerHTML += `<div style="color:#55efc4">✓ Excellent: "${input}"</div>`;
+            setTimeout(nextQuestion, 3000);
+        } 
+        else if (score >= 0.4) {
+            // 还可以，需要完善
+            const hintWord = missingKeywords[0]; // 拿出一个缺失的词做提示
+            const hintText = q.hints[hintWord] || `You missed the concept of '${hintWord}'.`;
+            
+            setMood('thinking', `Not bad, but incomplete. ${hintText}`);
+            log.innerHTML += `<div style="color:#ffeaa7">⚠ Close: You need to mention "${hintWord}".</div>`;
+        } 
+        else {
+            // 错误
+            if(attempts >= 3) {
+                 setMood('angry', "Come on! Look at the board, I'm giving you the answer!");
+                 log.innerHTML = `<div style="color:#ff7675">Hint: The answer should include words like: ${q.keywords.join(', ')}</div>`;
+            } else {
+                setMood('angry', getRandomAngryQuote());
+                log.innerHTML += `<div style="color:#ff7675">✗ Try again. Think about keywords.</div>`;
+            }
+        }
+    }
+
+    function nextQuestion() {
+        currentQIndex++;
+        if(currentQIndex >= curriculum.length) {
+            currentQIndex = 0; // 循环或者显示结束页面
+            setMood('happy', "Class dismissed! You aced all questions!");
+            document.getElementById('q-display').innerText = "You have completed today's training session.";
+        } else {
+            loadQuestion();
+        }
+    }
+
+    function getRandomAngryQuote() {
+        const quotes = [
+            "My grandmother codes better than that!",
+            "Is your keyboard broken or is it your logic?",
+            "I'm losing pixels waiting for a good answer!",
+            "Did you even read the textbook?",
+            "Error 404: Correct answer not found."
+        ];
+        return quotes[Math.floor(Math.random() * quotes.length)];
+    }
+
+    // 初始化
+    loadQuestion();
+
+    // 增加一些随机互动 (Idle Animation)
+    setInterval(() => {
+        if(document.getElementById('user-input').value === "" && Math.random() > 0.8) {
+            setMood('goofy', "Zzz... Do you need a coffee? Or maybe a Red Bull?");
+        }
+    }, 15000);
+
+</script>
+
+</body>
+</html>

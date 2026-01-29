@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1758015063248,
+    "title": "Operating Systems 1",
+    "question": "/past_papers/chapter_5_1/question_1758015063179.png",
+    "answer": "/past_papers/chapter_5_1/answer_1758015063201.png",
+    "solution": "The Operating System is essential for:\r\nProviding a user-friendly interface.\r\nManaging memory for data storage and multitasking.\r\nOrganizing files for easy access and management.\r\nHandling inputs/outputs for hardware communication.\r\nManaging processes for fair and efficient program\r\nexecution.\r\nWithout an OS, using a computer would be complex and\r\ninefficient!"
+  },
+  {
+    "id": 1758016989401,
+    "title": "Operating System  file management",
+    "question": "/past_papers/chapter_5_1/question_1758016989313.png",
+    "answer": "/past_papers/chapter_5_1/answer_1758016989342.png",
+    "solution": "▶ File management is critical for organizing and securing\r\ndata.\r\n▶ Key tasks include:\r\n▶ Defining file naming conventions\r\n▶ Performing file operations (create, delete, etc.)\r\n▶ Maintaining directory structures and storage allocation\r\n▶ Specifying logical storage formats (FAT, NTFS)\r\n▶ Ensuring access control and file sharing\r\n▶ Enabling file search and retrieval\r\n▶ These tasks ensure efficient and secure file handling in an\r\nOS."
+  },
+  {
+    "id": 1758522954869,
+    "title": "opreating systems-Memory and process management",
+    "question": "/past_papers/chapter_5_1/question_1758522953200.png",
+    "answer": "/past_papers/chapter_5_1/answer_1758522953762.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1758523586025,
+    "title": "Operating System 2",
+    "question": "/past_papers/chapter_5_1/question_1758523584275.png",
+    "answer": "/past_papers/chapter_5_1/answer_1758523584943.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1759143793726,
+    "title": "utility software",
+    "question": "/past_papers/chapter_5_1/question_1759143792564.png",
+    "answer": "/past_papers/chapter_5_1/answer_1759143793072.png",
+    "solution": "a)(i) Describe the file management tasks carried out by an OS.\r\n\r\nAllocates space on secondary storage to files and maintains directory structures.\r\nControls file access, including tasks like opening, closing, deleting, copying, or moving files.\r\n\r\n4(a)(ii) Explain the need for back-up software.\r\n\r\nEnables data retrieval or restoration when data is lost or corrupted.\r\nAutomatically creates duplicate copies of data, ensuring regular backups without user intervention."
+  },
+  {
+    "id": 1759144277456,
+    "title": "Program Libraries",
+    "question": "/past_papers/chapter_5_1/question_1759144276424.png",
+    "answer": "/past_papers/chapter_5_1/answer_1759144276684.png",
+    "solution": "Saves programming and testing time as pre-written code can be reused without needing to be created or tested from scratch.\r\nProvides robust, pre-tested code, ensuring reliability and reducing the likelihood of errors."
+  },
+  {
+    "id": 1759144872414,
+    "title": "Operating System3",
+    "question": "/past_papers/chapter_5_1/question_1759144871326.png",
+    "answer": "/past_papers/chapter_5_1/answer_1759144872078.png",
+    "solution": "a) Describe how the Operating System manages the peripheral hardware devices of the computer.\r\n\r\nInstalls device drivers to enable communication between peripherals and the computer.\r\nSends and receives data to and from peripherals, such as output to printers or input from keyboards.\r\nManages buffers to ensure smooth data transfer between devices operating at different speeds.\r\nHandles interrupts or signals from peripherals to prioritize and process device requests.\r\n\r\n3(b) Identify two other key management tasks carried out by the Operating System.\r\n\r\nMemory management\r\nProcess management\r\n\r\n3(c) Explain how defragmentation can improve the performance of the computer.\r\n\r\nRearranges file fragments on the hard disk to make them contiguous, reducing free space fragmentation.\r\nSpeeds up file access by eliminating the need to search for scattered file fragments.\r\nReduces disk head movement, improving data retrieval efficiency."
+  }
+]

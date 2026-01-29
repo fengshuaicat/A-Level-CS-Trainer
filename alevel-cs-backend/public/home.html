@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambridge A-Level CS Past Paper System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .btn-blue { background-color: #007bff; color: white; }
+        .btn-green { background-color: #28a745; color: white; }
+        .btn-red { background-color: #dc3545; color: white; }
+        .btn-gray { background-color: #6c757d; color: white; }
+        .btn-purple { background-color: #6f42c1; color: white; }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 90vw;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .hidden {
+            display: none;
+        }
+        .paper-card {
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            max-height: 60vh;
+        }
+        .text-gray {
+            color: #666;
+        }
+        .text-blue {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .text-blue:hover {
+            text-decoration: underline;
+        }
+        .ai-result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e7f3ff;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .content {
+            margin-top: 10px;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .ai-loading {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fff3cd;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            text-align: center;
+            position: relative;
+        }
+        .ai-loading h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        .ai-loading p {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ffc107;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .close-loading-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .close-loading-btn:hover {
+            background-color: #c82333;
+        }
+        /* 新增：右上角得分显示 */
+        .score-display {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        /* 新增：排行榜模态 */
+        #ranking-modal .modal-content {
+            max-width: 600px;
+        }
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .ranking-item.first { background-color: #dc3545; color: white; }
+        .ranking-item.second { background-color: #28a745; color: white; }
+        .ranking-item.third { background-color: #007bff; color: white; }
+        .ranking-item.other { background-color: #f8f9fa; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        <!-- Role Selection -->
+        <div id="role-selection">
+            <h1>Cambridge A-Level CS Past Paper System</h1>
+            <button onclick="showTeacherLogin()" class="btn-blue">Teacher</button>
+            <button onclick="showStudentLogin()" class="btn-green">Student</button>
+        </div>
+
+        <!-- Teacher Login Modal -->
+        <div id="teacher-auth-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Teacher Login</h2>
+                <div>
+                    <label for="teacher-password">Password</label>
+                    <input type="password" id="teacher-password" placeholder="Enter password">
+                </div>
+                <div>
+                    <button onclick="loginTeacher()" class="btn-blue">Login</button>
+                    <button onclick="closeTeacherModal()" class="btn-red">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Login/Register Modal -->
+        <div id="student-auth-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="auth-title"></h2>
+                <div>
+                    <label for="student-name">Name</label>
+                    <input type="text" id="student-name" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label for="student-class">Class</label>
+                    <select id="student-class">
+                        <option value="">Select a class</option>
+                        <option value="IG">IG</option>
+                        <option value="PREA">PREA</option>
+                        <option value="AS">AS</option>
+                    </select>
+                </div>
+                <div>
+                    <button id="auth-button" class="btn-blue"></button>
+                    <button onclick="toggleAuthMode()" class="btn-gray">Switch to Register/Login</button>
+                    <button onclick="closeAuthModal()" class="btn-red">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Dashboard -->
+        <div id="teacher-dashboard" class="hidden">
+            <h2>Teacher Dashboard</h2>
+            <button onclick="showUploadInterface()" class="btn-blue">New Question Upload</button>
+            <button onclick="showGradingInterface()" class="btn-purple">Assignment Grading</button>
+            <button onclick="logout()" class="btn-gray">Logout</button>
+        </div>
+
+        <!-- Teacher Upload Interface -->
+        <div id="teacher-upload-interface" class="hidden">
+            <h2>New Question Upload</h2>
+            <div>
+                <label for="chapter-select">Select Chapter</label>
+                <select id="chapter-select" onchange="loadTeacherPapers()"></select>
+            </div>
+            <div>
+                <label for="question-title">Question Title</label>
+                <input type="text" id="question-title" placeholder="Enter question title">
+            </div>
+            <div>
+                <label for="question-file">Upload Question Image</label>
+                <input type="file" id="question-file" accept="image/*">
+            </div>
+            <div>
+                <label for="answer-file">Upload Answer Image</label>
+                <input type="file" id="answer-file" accept="image/*">
+            </div>
+            <div>
+                <label for="mark-scheme">Mark Scheme</label>
+                <textarea id="mark-scheme" rows="5" placeholder="Enter the mark scheme (scoring criteria and full mark answer reference)"></textarea>
+            </div>
+            <button onclick="uploadPaper()" class="btn-blue">Upload</button>
+            <div>
+                <h3>Manage Uploaded Papers</h3>
+                <div id="teacher-paper-list"></div>
+            </div>
+            <button onclick="showTeacherDashboard()" class="btn-gray">Back to Dashboard</button>
+        </div>
+
+        <!-- Teacher Grading Interface -->
+        <div id="teacher-grading-interface" class="hidden">
+            <h2>Assignment Grading</h2>
+            <div style="display: flex; gap: 10px;">
+                <div>
+                    <label for="grading-chapter-select">Select Chapter</label>
+                    <select id="grading-chapter-select" onchange="loadTeacherSubmissions()"></select>
+                </div>
+                <div>
+                    <label for="class-filter">Filter by Class</label>
+                    <select id="class-filter" onchange="filterSubmissions()">
+                        <option value="">All Classes</option>
+                        <option value="IG">IG</option>
+                        <option value="PREA">PREA</option>
+                        <option value="AS">AS</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sort-order">Sort by Time</label>
+                    <select id="sort-order" onchange="filterSubmissions()">
+                        <option value="desc">Newest First</option>
+                        <option value="asc">Oldest First</option>
+                    </select>
+                </div>
+            </div>
+            <div id="teacher-submission-list"></div>
+            <button onclick="showTeacherDashboard()" class="btn-gray">Back to Dashboard</button>
+        </div>
+
+        <!-- Student Interface -->
+        <div id="student-interface" class="hidden">
+            <h2>Student: Browse Past Papers</h2>
+            <!-- 新增：右上角得分显示 -->
+            <div id="student-score-display" class="score-display hidden">总分: 0</div>
+            <div>
+                <label for="student-chapter-select">Select Chapter</label>
+                <select id="student-chapter-select" onchange="loadPapers()"></select>
+            </div>
+            <!-- 新增：得分排行榜按钮 -->
+            <button onclick="showRankingModal()" class="btn-purple">得分排行榜</button>
+            <div id="paper-list"></div>
+            <button onclick="logout()" class="btn-gray">Logout</button>
+        </div>
+
+        <!-- Modal for Viewing Images and Solution -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <button onclick="closeModal()" class="btn-red">Close</button>
+                <img id="modal-image" alt="Image">
+                <div id="modal-mark-scheme" class="text-gray"></div>
+            </div>
+        </div>
+
+        <!-- 新增：排行榜模态 -->
+        <div id="ranking-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>得分排行榜</h2>
+                <div id="ranking-list"></div>
+                <button onclick="closeRankingModal()" class="btn-red">Close</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const BASE_URL = 'http://fengshuaicat.asia:3005';
+    const chapters = [
+        { id: "1", title: "Information representation and multimedia" },
+        { id: "1.1", title: "Data representation" },
+        { id: "1.2", title: "Multimedia" },
+        { id: "1.3", title: "File compression" },
+        { id: "2", title: "Communication" },
+        { id: "2.1", title: "Networking" },
+        { id: "2.2", title: "The internet" },
+        { id: "3", title: "Hardware" },
+        { id: "3.1", title: "Computers and their components" },
+        { id: "3.2", title: "Logic gates and logic circuits" },
+        { id: "4", title: "Processor fundamentals" },
+        { id: "4.1", title: "Central processing unit (CPU) architecture" },
+        { id: "4.2", title: "Assembly language" },
+        { id: "4.3", title: "Bit manipulation" },
+        { id: "5", title: "System software" },
+        { id: "5.1", title: "Operating systems" },
+        { id: "5.2", title: "Language translators" },
+        { id: "6", title: "Security, privacy and data integrity" },
+        { id: "6.1", title: "Data security" },
+        { id: "6.2", title: "Data integrity" },
+        { id: "7", title: "Ethics and ownership" },
+        { id: "7.1", title: "Legal, moral, ethical and cultural implications" },
+        { id: "7.2", title: "Copyright issues" },
+        { id: "7.3", title: "Artificial intelligence (AI)" },
+        { id: "8", title: "Databases" },
+        { id: "8.1", title: "Database concepts" },
+        { id: "8.2", title: "Database management systems (DBMSs)" },
+        { id: "8.3", title: "Data definition language (DDL) and data manipulation language (DML)" },
+        { id: "9", title: "Algorithm design and problem solving" },
+        { id: "9.1", title: "Computational thinking skills" },
+        { id: "9.2", title: "Algorithms" },
+        { id: "10", title: "Data types and structures" },
+        { id: "10.1", title: "Data types and records" },
+        { id: "10.2", title: "Arrays" },
+        { id: "10.3", title: "Files" },
+        { id: "10.4", title: "Abstract data types (ADTs)" },
+        { id: "11", title: "Programming" },
+        { id: "11.1", title: "Programming basics" },
+        { id: "11.2", title: "Programming constructs" },
+        { id: "11.3", title: "Structured programming" },
+        { id: "12", title: "Software development" },
+        { id: "12.1", title: "Program development lifecycle" },
+        { id: "12.2", title: "Program design" },
+        { id: "12.3", title: "Program testing and maintenance" },
+        { id: "13", title: "Data representation" },
+        { id: "13.1", title: "User-defined data types" },
+        { id: "13.2", title: "File organisation and access" },
+        { id: "13.3", title: "Floating-point numbers, representation and manipulation" },
+        { id: "14", title: "Communication and internet technologies" },
+        { id: "14.1", title: "Protocols" },
+        { id: "14.2", title: "Circuit switching and packet switching" },
+        { id: "15", title: "Hardware" },
+        { id: "15.1", title: "Processors and parallel processing" },
+        { id: "15.2", title: "Boolean algebra and logic circuits" },
+        { id: "16", title: "System software and virtual machines" },
+        { id: "16.1", title: "Purposes of an operating system (OS)" },
+        { id: "16.2", title: "Virtual machines (VMs)" },
+        { id: "16.3", title: "Translation software" },
+        { id: "17", title: "Security" },
+        { id: "17.1", title: "Encryption" },
+        { id: "17.2", title: "Quantum cryptography" },
+        { id: "17.3", title: "Protocols" },
+        { id: "17.4", title: "Digital signatures and digital certificates" },
+        { id: "18", title: "Artificial intelligence (AI)" },
+        { id: "18.1", title: "Shortest path algorithms" },
+        { id: "18.2", title: "Artificial intelligence, machine learning and deep learning" },
+        { id: "19", title: "Computational thinking and problem solving" },
+        { id: "19.1", title: "Algorithms" },
+        { id: "19.2", title: "Recursion" },
+        { id: "20", title: "Further programming" },
+        { id: "20.1", title: "Programming paradigms" },
+        { id: "20.2", title: "File processing and exception handling" }
+    ];
+
+    let currentRole = null;
+    let currentStudent = null;
+    let isRegisterMode = true;
+    let allSubmissions = [];
+    let studentTotalScore = 0;  // 新增：当前学生总分
+
+    function setRole(role) {
+        currentRole = role;
+        document.getElementById('role-selection').classList.add('hidden');
+        if (role === 'teacher') {
+            document.getElementById('teacher-dashboard').classList.remove('hidden');
+            populateChapterSelect('grading-chapter-select');
+        } else if (role === 'student') {
+            document.getElementById('student-interface').classList.remove('hidden');
+            populateChapterSelect('student-chapter-select');
+            loadStudentTotalScore();  // 新增：加载当前学生总分
+        }
+    }
+
+    function logout() {
+        if (confirm('Logout and clear session?')) {
+            localStorage.removeItem('currentStudent');
+            currentStudent = null;
+            currentRole = null;
+            studentTotalScore = 0;
+            document.querySelectorAll('.hidden:not(#role-selection)').forEach(el => el.classList.add('hidden'));
+            document.getElementById('role-selection').classList.remove('hidden');
+            document.getElementById('student-score-display').classList.add('hidden');
+        }
+    }
+
+    function showTeacherDashboard() {
+        document.getElementById('teacher-upload-interface').classList.add('hidden');
+        document.getElementById('teacher-grading-interface').classList.add('hidden');
+        document.getElementById('teacher-dashboard').classList.remove('hidden');
+    }
+
+    function populateChapterSelect(selectId) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = '<option value="">Select a chapter</option>';
+        chapters.forEach(chapter => {
+            const option = document.createElement('option');
+            option.value = chapter.id;
+            option.textContent = chapter.title;
+            select.appendChild(option);
+        });
+    }
+
+    // Teacher Login Functions
+    function showTeacherLogin() {
+        document.getElementById('teacher-auth-modal').classList.remove('hidden');
+    }
+
+    async function loginTeacher() {
+        const password = document.getElementById('teacher-password').value;
+        try {
+            const response = await fetch(`${BASE_URL}/teacher_login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+            if (response.ok) {
+                setRole('teacher');
+                closeTeacherModal();
+            } else {
+                alert('Invalid password');
+            }
+        } catch (error) {
+            alert('Login error: ' + error.message);
+        }
+    }
+
+    function closeTeacherModal() {
+        document.getElementById('teacher-auth-modal').classList.add('hidden');
+        document.getElementById('teacher-password').value = '';
+    }
+
+    // Student Auth Functions
+    function showStudentLogin() {
+        isRegisterMode = false;
+        document.getElementById('auth-title').textContent = 'Student Login';
+        document.getElementById('auth-button').textContent = 'Login';
+        document.getElementById('student-auth-modal').classList.remove('hidden');
+    }
+
+    function toggleAuthMode() {
+        isRegisterMode = !isRegisterMode;
+        document.getElementById('auth-title').textContent = isRegisterMode ? 'Student Register' : 'Student Login';
+        document.getElementById('auth-button').textContent = isRegisterMode ? 'Register' : 'Login';
+    }
+
+    async function handleAuth() {
+        const name = document.getElementById('student-name').value.trim();
+        const className = document.getElementById('student-class').value;
+        if (!name || !className) {
+            alert('Please fill in name and class.');
+            return;
+        }
+
+        try {
+            const endpoint = isRegisterMode ? '/register' : '/login';
+            const response = await fetch(`${BASE_URL}${endpoint}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, class: className })
+            });
+            if (response.ok) {
+                currentStudent = { name, class: className };
+                localStorage.setItem('currentStudent', JSON.stringify(currentStudent));
+                setRole('student');
+                closeAuthModal();
+            } else {
+                const errorText = await response.text();
+                alert(errorText);
+            }
+        } catch (error) {
+            alert('Auth error: ' + error.message);
+        }
+    }
+
+    function closeAuthModal() {
+        document.getElementById('student-auth-modal').classList.add('hidden');
+        document.getElementById('student-name').value = '';
+        document.getElementById('student-class').value = '';
+    }
+
+    document.getElementById('auth-button').addEventListener('click', handleAuth);
+
+    function showUploadInterface() {
+        document.getElementById('teacher-upload-interface').classList.remove('hidden');
+        document.getElementById('teacher-grading-interface').classList.add('hidden');
+        document.getElementById('teacher-dashboard').classList.add('hidden');
+        populateChapterSelect('chapter-select');
+        loadTeacherPapers();
+    }
+
+    function showGradingInterface() {
+        document.getElementById('teacher-grading-interface').classList.remove('hidden');
+        document.getElementById('teacher-upload-interface').classList.add('hidden');
+        document.getElementById('teacher-dashboard').classList.add('hidden');
+        populateChapterSelect('grading-chapter-select');
+        loadTeacherSubmissions();
+    }
+
+    async function uploadPaper() {
+        const chapter = document.getElementById('chapter-select').value;
+        const questionTitle = document.getElementById('question-title').value;
+        const questionFile = document.getElementById('question-file').files[0];
+        const answerFile = document.getElementById('answer-file').files[0];
+        const markScheme = document.getElementById('mark-scheme').value;
+
+        if (!chapter || !questionTitle || !questionFile || !answerFile || !markScheme) {
+            alert('Please fill all fields: chapter, question title, question image, answer image, and mark scheme.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('chapter', chapter);
+        formData.append('title', questionTitle);
+        formData.append('question', questionFile);
+        formData.append('answer', answerFile);
+        formData.append('markScheme', markScheme);
+
+        try {
+            const response = await fetch(`${BASE_URL}/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                alert('Paper uploaded successfully!');
+                document.getElementById('question-title').value = '';
+                document.getElementById('question-file').value = '';
+                document.getElementById('answer-file').value = '';
+                document.getElementById('mark-scheme').value = '';
+                loadTeacherPapers();
+            } else {
+                alert('Upload failed. Please check the server.');
+            }
+        } catch (error) {
+            alert('Upload error: ' + error.message);
+        }
+    }
+
+    async function loadTeacherPapers() {
+        const chapter = document.getElementById('chapter-select').value;
+        const paperList = document.getElementById('teacher-paper-list');
+        if (!chapter) {
+            paperList.innerHTML = '';
+            return;
+        }
+
+        try {
+            const response = await fetch(`${BASE_URL}/papers/${chapter}`);
+            const papers = await response.json();
+            paperList.innerHTML = papers.map(paper => `
+                <div class="paper-card">
+                    <h4>${paper.title}</h4>
+                    <img src="${BASE_URL}${paper.question}" alt="Question">
+                    <button onclick="deletePaper('${chapter}', ${paper.id}, '${paper.question}', '${paper.answer}')" class="btn-red">Delete</button>
+                </div>
+            `).join('');
+        } catch (error) {
+            paperList.innerHTML = '<p>Error loading papers.</p>';
+        }
+    }
+
+    async function deletePaper(chapter, id, questionPath, answerPath) {
+        if (!confirm('Delete this paper?')) return;
+        try {
+            const response = await fetch(`${BASE_URL}/delete`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chapter, id, questionPath, answerPath })
+            });
+            if (response.ok) {
+                loadTeacherPapers();
+            }
+        } catch (error) {
+            alert('Delete error: ' + error.message);
+        }
+    }
+
+    async function loadTeacherSubmissions() {
+        const chapter = document.getElementById('grading-chapter-select').value;
+        if (!chapter) return;
+        try {
+            const response = await fetch(`${BASE_URL}/submissions/${chapter}`);
+            allSubmissions = await response.json();
+            filterSubmissions();
+        } catch (error) {
+            document.getElementById('teacher-submission-list').innerHTML = '<p>Error loading submissions.</p>';
+        }
+    }
+
+    function filterSubmissions() {
+        const classFilter = document.getElementById('class-filter').value;
+        const sortOrder = document.getElementById('sort-order').value;
+        let filtered = allSubmissions;
+
+        if (classFilter) {
+            filtered = filtered.filter(sub => sub.studentClass === classFilter);
+        }
+
+        filtered.sort((a, b) => sortOrder === 'desc' ? b.timestamp - a.timestamp : a.timestamp - b.timestamp);
+
+        document.getElementById('teacher-submission-list').innerHTML = filtered.map(sub => `
+            <div class="paper-card">
+                <h4>${sub.title} - ${sub.studentName} (${sub.studentClass})</h4>
+                <p>Answer: ${escapeHtml(sub.answer)}</p>
+                <p>Score: ${sub.score || 'Not graded'}</p>
+                <input type="number" id="score-${sub.paperId}-${sub.studentName}" min="0" max="100" value="${sub.score || ''}">
+                <button onclick="submitScore('${sub.chapter}', ${sub.paperId}, '${sub.studentName}')" class="btn-blue">Update Score</button>
+                <button onclick="aiGradeTeacher('${sub.chapter}', ${sub.paperId}, '${sub.studentName}')" class="btn-purple">AI Grade</button>
+            </div>
+        `).join('');
+    }
+
+    async function submitScore(chapter, paperId, studentName) {
+        const score = parseInt(document.getElementById(`score-${paperId}-${studentName}`).value);
+        if (isNaN(score)) return alert('Invalid score');
+        try {
+            const response = await fetch(`${BASE_URL}/score`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chapter, paperId, studentName, score })
+            });
+            if (response.ok) alert('Score updated');
+        } catch (error) {
+            alert('Update error: ' + error.message);
+        }
+    }
+
+    async function aiGradeTeacher(chapter, paperId, studentName) {
+        try {
+            const response = await fetch(`${BASE_URL}/ai_grade`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chapter, paperId, studentName })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert(`AI Score: ${data.score}\nFeedback: ${data.feedback}`);
+            } else {
+                alert('AI Grade failed: ' + data.error);
+            }
+        } catch (error) {
+            alert('AI error: ' + error.message);
+        }
+    }
+
+    // 新增：加载当前学生总分
+    async function loadStudentTotalScore() {
+        if (!currentStudent) return;
+        try {
+            const response = await fetch(`${BASE_URL}/student_total_score?student=${encodeURIComponent(currentStudent.name)}`);
+            if (response.ok) {
+                const data = await response.json();
+                studentTotalScore = data.totalScore || 0;
+                document.getElementById('student-score-display').textContent = `总分: ${studentTotalScore}`;
+                document.getElementById('student-score-display').classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Load total score error:', error);
+        }
+    }
+
+    // 新增：显示排行榜模态
+    async function showRankingModal() {
+        try {
+            const response = await fetch(`${BASE_URL}/student_scores`);
+            if (response.ok) {
+                const rankings = await response.json();
+                // 按总分降序排序
+                rankings.sort((a, b) => b.totalScore - a.totalScore);
+                const rankingList = document.getElementById('ranking-list');
+                rankingList.innerHTML = rankings.map((rank, index) => `
+                    <div class="ranking-item ${index === 0 ? 'first' : index === 1 ? 'second' : index === 2 ? 'third' : 'other'}">
+                        <span>${index + 1}. ${rank.name} (${rank.class})</span>
+                        <span>${rank.totalScore}</span>
+                    </div>
+                `).join('');
+                document.getElementById('ranking-modal').classList.remove('hidden');
+            } else {
+                alert('加载排行榜失败');
+            }
+        } catch (error) {
+            alert('加载排行榜错误: ' + error.message);
+        }
+    }
+
+    // 新增：关闭排行榜模态
+    function closeRankingModal() {
+        document.getElementById('ranking-modal').classList.add('hidden');
+    }
+
+    async function loadPapers() {
+        const chapter = document.getElementById('student-chapter-select').value;
+        const paperList = document.getElementById('paper-list');
+        paperList.innerHTML = '';
+
+        if (!chapter) {
+            paperList.innerHTML = '<p class="text-gray">Please select a chapter.</p>';
+            return;
+        }
+
+        try {
+            const response = await fetch(`${BASE_URL}/papers/${chapter}?student=${encodeURIComponent(currentStudent.name)}`);
+            const papers = await response.json();
+
+            if (!papers || papers.length === 0) {
+                paperList.innerHTML = '<p class="text-gray">No papers available for this chapter.</p>';
+                return;
+            }
+
+            papers.forEach(paper => {
+                const div = document.createElement('div');
+                div.className = 'paper-card';
+                let submissionHtml = '';
+                if (paper.submission) {
+                    submissionHtml = `
+                        <p><strong>Your Answer:</strong> ${escapeHtml(paper.submission.answer)}</p>
+                        ${paper.submission.score !== undefined ? `<p><strong>Score:</strong> ${paper.submission.score}</p>` : ''}
+                    `;
+                }
+                const questionUrl = `${BASE_URL}${paper.question}`;
+                const answerUrl = `${BASE_URL}${paper.answer}`;
+                console.log('Question URL:', questionUrl);
+                console.log('Answer URL:', answerUrl);
+                const aiResultId = `ai-result-${paper.id}`;
+                const aiLoadingId = `ai-loading-${paper.id}`;
+                const showAiButton = paper.markScheme ? '' : ' hidden';
+                const escapedMarkScheme = paper.markScheme ? paper.markScheme
+                    .replace(/\\/g, '\\\\')
+                    .replace(/'/g, "\\'")
+                    .replace(/"/g, '\\"')
+                    .replace(/`/g, '\\`')
+                    .replace(/\n/g, '\\n')
+                    .replace(/\r/g, '\\r')
+                    .replace(/\t/g, '\\t') : '';
+                div.innerHTML = `
+                    <button onclick="toggleContent(this)" class="text-blue">${paper.title}</button>
+                    <div class="content hidden">
+                        <img src="${questionUrl}" alt="Question" class="cursor-pointer" onerror="this.src=''; this.alt='Question image failed to load'" onclick="showModal('${questionUrl}', '')">
+                        <button onclick="showModal('${answerUrl}', '${escapedMarkScheme}')" class="btn-green">View Answer & Mark Scheme</button>
+                        <textarea id="answer-${paper.id}" rows="5" placeholder="Enter your answer here">${paper.submission ? paper.submission.answer : ''}</textarea>
+                        <button onclick="submitAnswer('${chapter}', ${paper.id}, 'answer-${paper.id}')" class="btn-blue">Submit Answer</button>
+                        <button onclick="aiGradeStudent('${chapter}', ${paper.id}, 'answer-${paper.id}')" class="btn-purple${showAiButton}">AI 自动阅卷</button>
+                        <div id="${aiLoadingId}" class="ai-loading hidden">
+                            <button class="close-loading-btn" onclick="hideAiLoading(${paper.id})">&times;</button>
+                            <div class="spinner"></div>
+                            <h4>AI 正在工作</h4>
+                            <p>请耐心等待，智能阅卷中... <br>如果等待过长，可点击右上关闭按钮取消。</p>
+                        </div>
+                        <div id="${aiResultId}" class="ai-result hidden">
+                            <p><strong>AI 分数：</strong> <span id="ai-score-${paper.id}"></span></p>
+                            <p><strong>AI 反馈：</strong> <span id="ai-feedback-${paper.id}"></span></p>
+                            <p><strong>满分答案：</strong> <span id="ai-fullmark-${paper.id}"></span></p>
+                        </div>
+                        ${submissionHtml}
+                    </div>
+                `;
+                paperList.appendChild(div);
+            });
+        } catch (error) {
+            paperList.innerHTML = '<p class="text-gray">Failed to load papers. Please check the server.</p>';
+            console.error('Load papers error:', error);
+        }
+    }
+
+    function hideAiLoading(paperId) {
+        const loadingDiv = document.getElementById(`ai-loading-${paperId}`);
+        if (loadingDiv) {
+            loadingDiv.classList.add('hidden');
+        }
+    }
+
+    async function submitAnswer(chapter, paperId, textareaId) {
+        const answer = document.getElementById(textareaId).value.trim();
+        if (!answer) {
+            alert('Please enter an answer.');
+            return;
+        }
+        try {
+            const response = await fetch(`${BASE_URL}/submit`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chapter, paperId, studentName: currentStudent.name, studentClass: currentStudent.class, answer })
+            });
+            if (response.ok) {
+                alert('Answer submitted!');
+                loadPapers();
+                loadStudentTotalScore();  // 新增：提交后刷新总分
+            } else {
+                alert('Submit failed.');
+            }
+        } catch (error) {
+            alert('Submit error: ' + error.message);
+        }
+    }
+
+    async function aiGradeStudent(chapter, paperId, textareaId) {
+        const answer = document.getElementById(textareaId).value.trim();
+        if (!answer) {
+            alert('请先输入答案！');
+            return;
+        }
+        if (confirm('使用 AI 自动阅卷？结果仅供参考。')) {
+            const loadingDiv = document.getElementById(`ai-loading-${paperId}`);
+            if (loadingDiv) {
+                loadingDiv.classList.remove('hidden');
+            }
+
+            const resultDiv = document.getElementById(`ai-result-${paperId}`);
+            const scoreSpan = document.getElementById(`ai-score-${paperId}`);
+            const feedbackSpan = document.getElementById(`ai-feedback-${paperId}`);
+            const fullMarkSpan = document.getElementById(`ai-fullmark-${paperId}`);
+            resultDiv.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${BASE_URL}/ai_grade`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        chapter, 
+                        paperId, 
+                        studentName: currentStudent.name, 
+                        answer
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP 错误: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log('AI Grade Response:', JSON.stringify(data, null, 2));
+                if (data.score !== undefined && data.feedback && data.fullMarkAnswer !== undefined) {
+                    scoreSpan.textContent = data.score;
+                    feedbackSpan.textContent = data.feedback;
+                    fullMarkSpan.textContent = data.fullMarkAnswer;
+                    resultDiv.classList.remove('hidden');
+                    loadStudentTotalScore();  // 新增：AI 阅卷后刷新总分
+                } else {
+                    throw new Error('AI 返回格式错误: ' + JSON.stringify(data));
+                }
+            } catch (error) {
+                console.error('AI Grade Error:', error);
+                alert(`AI 阅卷失败: ${error.message}。请检查网络或服务器。`);
+            } finally {
+                if (loadingDiv) {
+                    loadingDiv.classList.add('hidden');
+                }
+            }
+        }
+    }
+
+    function showModal(imageSrc, markScheme) {
+        console.log('Modal image URL:', imageSrc);
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalMarkScheme = document.getElementById('modal-mark-scheme');
+        if (!modalImage || !modalMarkScheme) {
+            console.error('Modal elements not found');
+            return;
+        }
+        modalImage.src = imageSrc;
+        modalImage.onerror = () => {
+            console.error('Failed to load image:', imageSrc);
+            modalImage.alt = 'Image failed to load - check server URL';
+        };
+        modalMarkScheme.innerHTML = markScheme ? `<h3>Mark Scheme</h3><p>${markScheme.replace(/\n/g, '<br>')}</p>` : '';
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+
+    function toggleContent(button) {
+        const content = button.nextElementSibling;
+        content.classList.toggle('hidden');
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+</script>
+</body>
+</html>

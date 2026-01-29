@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Level CS Trainer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/windows.css">
+</head>
+<body>
+    <header><h1>A-Level CS Trainer</h1></header>
+
+    <section class="hero">
+        <h2>A-Level Computer Science</h2>
+        <p>40章节完整版 · 视频练习 + 教练一对一 + 费曼录制全恢复</p>
+        <button class="btn-start" onclick="document.querySelector('.container').scrollIntoView({behavior:'smooth'})">开始学习</button>
+    </section>
+
+<div class="container" id="chapters-container" style="max-height: calc(100vh - 280px); overflow-y: auto; padding: 20px; box-sizing: border-box;">
+    <!-- 所有章节会由JS自动加载这里 -->
+</div>
+
+    <footer>© 2025 A-Level CS Trainer | 模块化版本 · 永久免费</footer>
+
+    <!-- 正确顺序（超级重要！） -->
+    <script src="js/practice-data.js"></script>   <!-- 1. 题目库 -->
+    <script src="js/practice.js"></script>        <!-- 2. Practice 逻辑（包含右下角按钮） -->
+    <script src="js/data.js"></script>            <!-- 3. 章节数据 -->
+    <script src="js/main.js"></script>            <!-- 4. 渲染章节 -->
+    <script src="js/coach-ai.js"></script>
+    <script src="js/feynman.js"></script>
+    <script src="js/windows.js"></script>         <!-- 最后！所有功能都依赖它 -->
+    <script src="js/practice-system.js"></script>
+
+
+</body>
+</html>
+</body>
+</html>
+
+</body>
+</html>

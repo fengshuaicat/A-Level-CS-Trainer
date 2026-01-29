@@ -1,0 +1,35 @@
+[
+  {
+    "paperId": 1760143605236,
+    "title": "1- lossless compression",
+    "studentName": "123541542",
+    "studentClass": "PREA",
+    "answer": "RLE \nRequences the same color to compression.",
+    "timestamp": 1760146559837,
+    "score": 40,
+    "aiFeedback": "你的答案过于简略，仅提到RLE和颜色压缩，但未准确描述其原理（如用颜色代码和重复次数替代重复像素序列），缺乏逻辑完整性和清晰度。",
+    "fullMarkAnswer": "中文分析：完整的答案应包括：1. 明确指出无损压缩方法如行程长度编码（Run-length encoding, RLE）；2. 准确解释RLE如何将连续相同颜色的像素序列替换为颜色代码和重复次数；3. 说明该方法在图像压缩中的应用场景和优势。\n\nEnglish Full Mark Answer: A complete answer should include: 1. Identification of a lossless compression method such as Run-length encoding (RLE); 2. A clear explanation that RLE replaces consecutive sequences of identical pixels (e.g., same colour) with a single colour code and a count of how many times it repeats; 3. A brief note on its relevance, e.g., effective for images with large uniform areas like simple graphics or icons."
+  },
+  {
+    "paperId": 1760143605236,
+    "title": "1- lossless compression",
+    "studentName": "胡家信",
+    "studentClass": "PREA",
+    "answer": "RLE\nsimplify repeated colors into shorter codes",
+    "timestamp": 1760166045200,
+    "score": 55,
+    "aiFeedback": "你的答案提到了RLE和简化重复颜色，但缺乏对无损压缩原理的准确描述，未说明用颜色代码和重复次数替代像素序列的具体机制，逻辑不完整且细节不足。",
+    "fullMarkAnswer": "中文分析：完整的答案应包括：1. 明确指出RLE（行程长度编码）是一种无损压缩技术；2. 解释其通过将连续相同颜色的像素序列替换为颜色代码和该颜色重复次数来实现压缩；3. 强调压缩后数据可完全还原，无信息丢失。\n\nEnglish Full Mark Answer: A complete answer should include: 1. Clearly state that Run-Length Encoding (RLE) is a lossless compression technique; 2. Explain that it works by replacing sequences of identical pixels (e.g., same colour) with a colour code and a count of how many times it repeats; 3. Emphasize that the original data can be perfectly reconstructed from the compressed data, ensuring no loss of information."
+  },
+  {
+    "paperId": 1760143866666,
+    "title": "2- compresses",
+    "studentName": "胡家信",
+    "studentClass": "PREA",
+    "answer": "The file will be smaller after compression,witch avoids the question if the file is too big for transfer.Also, bobby could transfer the file faster if he compress it.",
+    "timestamp": 1760166608287,
+    "score": 70,
+    "aiFeedback": "你的答案提到了压缩后文件变小和传输更快，基本符合评分标准中的要点，但表述不够准确（如'witch'拼写错误），且未明确指出原始文件过大无法作为电子邮件附件这一关键点。逻辑完整性略有欠缺。",
+    "fullMarkAnswer": "中文分析：完整答案应准确指出压缩的三个核心优点：1. 减小文件大小；2. 加快传输或下载速度；3. 解决原始文件过大无法作为电子邮件附件的问题。表述需清晰、语法正确，并直接回应题干情境。\n\nEnglish Full Mark Answer: A full-mark answer should clearly and accurately state: 1. Compression reduces the file size. 2. This makes the file faster to transmit or download. 3. The original file may be too large to be sent as an email attachment, and compression solves this issue. The response must be logically complete, relevant, and expressed with clarity and correct grammar."
+  }
+]

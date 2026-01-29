@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Brawler: Street Debugger</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            overflow: hidden;
+            font-family: 'Press Start 2P', cursive; /* 像素风字体 */
+            user-select: none;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, #20002c, #cbb4d4); /* 复古夕阳背景 */
+            overflow: hidden;
+        }
+
+        /* 城市背景层 (视差滚动) */
+        .background-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 60%;
+            background-image: 
+                linear-gradient(transparent 90%, #000 90%),
+                linear-gradient(90deg, rgba(50,50,100,0.5) 0px, transparent 2px);
+            background-size: 100px 100px;
+            transform: skewX(-20deg);
+            pointer-events: none;
+        }
+        
+        /* 地面 */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: #1a1a1a;
+            border-top: 4px solid #444;
+            z-index: 10;
+        }
+
+        /* HUD */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 20;
+            display: flex;
+            gap: 20px;
+        }
+
+        .player-hud {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .health-bar-frame {
+            width: 200px;
+            height: 20px;
+            border: 3px solid white;
+            background: #500;
+        }
+
+        .health-bar-fill {
+            width: 100%;
+            height: 100%;
+            background: #ffcc00; /* 经典的街机黄血条 */
+            transition: width 0.2s;
+        }
+
+        .score { color: white; text-shadow: 2px 2px 0 #000; font-size: 14px; }
+
+        /* 战斗弹窗 (街机风格) */
+        #combat-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 100;
+            display: none; /* 默认隐藏 */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .combat-box {
+            width: 600px;
+            background: #002244;
+            border: 4px solid #00aaff;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 0 30px #00aaff;
+            position: relative;
+        }
+
+        .enemy-portrait {
+            width: 80px;
+            height: 80px;
+            background: red;
+            margin: 0 auto 10px;
+            border: 2px solid white;
+        }
+
+        .combat-timer {
+            color: #ff3333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .combat-btn {
+            background: #222;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.1s;
+        }
+        
+        .combat-btn:hover { background: #00aaff; color: #000; transform: scale(1.05); }
+        .combat-btn:active { transform: scale(0.95); }
+
+        /* 游戏对象样式 (用 Canvas 绘制，这里仅作 CSS 辅助) */
+        canvas { display: block; width: 100%; height: 100%; }
+
+        /* 提示 */
+        .tutorial {
+            position: absolute;
+            bottom: 100px; width: 100%; text-align: center;
+            color: rgba(255,255,255,0.5); font-size: 12px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% {opacity:0.3;} 50% {opacity:0.8;} 100% {opacity:0.3;} }
+
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <div class="background-layer"></div>
+    
+    <div id="hud">
+        <div class="player-hud">
+            <div class="score">1UP: <span id="score-val">00000</span></div>
+            <div class="health-bar-frame">
+                <div class="health-bar-fill" id="hp-bar"></div>
+            </div>
+            <div class="score" style="font-size:10px;">BIT (Lv.1)</div>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+    
+    <div class="ground"></div>
+    <div class="tutorial">ARROWS to Move | SPACE to Fight (Trigger Quiz)</div>
+
+    <div id="combat-overlay">
+        <div class="combat-box">
+            <div class="enemy-portrait"></div>
+            <h2 id="enemy-name" style="color:#ff5555;">ENEMY: SYNTAX ERROR</h2>
+            <div class="combat-timer">TIME: <span id="q-timer">10.0</span></div>
+            <p id="q-text" style="line-height: 1.6; font-size: 12px;">Question goes here...</p>
+            <div class="options-grid" id="q-options"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // 自适应 Canvas
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // === 游戏状态 ===
+    const STATE = {
+        PLAYING: 0,
+        COMBAT: 1,
+        GAMEOVER: 2
+    };
+    let currentState = STATE.PLAYING;
+    let score = 0;
+    let combo = 0;
+
+    // === 物理配置 ===
+    const GROUND_Y = canvas.height - 100; // 地面高度
+    
+    // === 角色对象 (简单矩形代替 Sprites) ===
+    const player = {
+        x: 100, y: GROUND_Y, width: 60, height: 100,
+        vx: 0, vy: 0, speed: 5,
+        color: '#00aaff', // 蓝色主角
+        hp: 100, maxHp: 100,
+        state: 'idle', // idle, walk, attack, hurt
+        facing: 1 // 1 right, -1 left
+    };
+
+    const enemies = [];
+    let enemySpawnTimer = 0;
+
+    // === A-Level CS 题库 (真题改编) ===
+    const questions = [
+        { q: "In OOP, hiding data within a class is called?", options: ["Encapsulation", "Inheritance", "Polymorphism", "Abstraction"], a: "Encapsulation" },
+        { q: "Which is a LIFO data structure?", options: ["Stack", "Queue", "Array", "Tree"], a: "Stack" },
+        { q: "Standard ASCII uses how many bits?", options: ["7", "8", "16", "32"], a: "7" },
+        { q: "What creates an Object Code?", options: ["Compiler", "Interpreter", "Editor", "Debugger"], a: "Compiler" },
+        { q: "Logic Gate: NOT(1 OR 0) = ?", options: ["0", "1", "True", "Unknown"], a: "0" },
+        { q: "Protocol for email retrieval?", options: ["IMAP", "SMTP", "FTP", "HTTP"], a: "IMAP" }
+    ];
+
+    // === 输入监听 ===
+    const keys = {};
+    window.addEventListener('keydown', e => keys[e.code] = true);
+    window.addEventListener('keyup', e => keys[e.code] = false);
+
+    // === 核心循环 ===
+    function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (currentState === STATE.PLAYING) {
+            updatePlayer();
+            updateEnemies();
+            spawnEnemies();
+            checkCollisions();
+        }
+
+        drawPlayer();
+        drawEnemies();
+
+        requestAnimationFrame(gameLoop);
+    }
+
+    function updatePlayer() {
+        // 左右移动
+        if (keys['ArrowRight']) { player.vx = player.speed; player.facing = 1; }
+        else if (keys['ArrowLeft']) { player.vx = -player.speed; player.facing = -1; }
+        else { player.vx = 0; }
+
+        // 跳跃 (简单)
+        if (keys['ArrowUp'] && player.y >= GROUND_Y) { player.vy = -15; }
+        
+        // 攻击 (主动触发战斗)
+        if (keys['Space']) {
+            // 只有当附近有敌人时才能触发
+            const nearest = enemies.find(e => Math.abs(e.x - player.x) < 100 && e.alive);
+            if (nearest) startCombat(nearest);
+        }
+
+        // 物理应用
+        player.vy += 0.8; // 重力
+        player.x += player.vx;
+        player.y += player.vy;
+
+        // 地面碰撞
+        if (player.y > GROUND_Y) { player.y = GROUND_Y; player.vy = 0; }
+        // 边界
+        if (player.x < 0) player.x = 0;
+    }
+
+    function spawnEnemies() {
+        enemySpawnTimer++;
+        // 每 300 帧生成一个敌人 (或者当场上没有敌人时)
+        if (enemySpawnTimer > 300 || (enemies.filter(e=>e.alive).length === 0 && enemySpawnTimer > 100)) {
+            enemySpawnTimer = 0;
+            const isBoss = Math.random() > 0.8;
+            enemies.push({
+                x: canvas.width + 50, // 从屏幕右侧出现
+                y: GROUND_Y,
+                width: isBoss ? 100 : 60,
+                height: isBoss ? 140 : 100,
+                vx: 0,
+                speed: isBoss ? 1 : 2,
+                color: isBoss ? '#ff00ff' : '#cc3333', // Boss 紫色，兵 红色
+                hp: isBoss ? 3 : 1, // Boss 需要答对3题，兵1题
+                name: isBoss ? "LOGIC LORD" : "BUG MINION",
+                alive: true,
+                type: isBoss ? 'boss' : 'mob'
+            });
+        }
+    }
+
+    function updateEnemies() {
+        enemies.forEach(e => {
+            if (!e.alive) return;
+
+            // 简单的 AI：走向玩家
+            const dx = player.x - e.x;
+            if (Math.abs(dx) > 40) { // 保持距离，不要重叠
+                e.x += (dx > 0 ? 1 : -1) * e.speed;
+            }
+        });
+    }
+
+    function checkCollisions() {
+        // 简单的碰撞触发战斗 (如果敌人碰到玩家)
+        enemies.forEach(e => {
+            if (!e.alive) return;
+            if (Math.abs(player.x - e.x) < 40 && Math.abs(player.y - e.y) < 50) {
+                // 自动进入战斗，或者提示按空格
+                // 这里为了流畅，我们让玩家按空格主动攻击，或者敌人攻击玩家
+            }
+        });
+    }
+
+    // === 绘图 ===
+    function drawPlayer() {
+        ctx.save();
+        // 阴影
+        ctx.fillStyle = 'rgba(0,0,0,0.3)';
+        ctx.fillRect(player.x, GROUND_Y + player.height, player.width, 10); 
+
+        // 身体
+        ctx.fillStyle = player.color;
+        // 如果受伤闪烁
+        if (player.state === 'hurt' && Math.floor(Date.now() / 100) % 2 === 0) ctx.fillStyle = 'white';
+        
+        // 绘制一个简单的“双截龙”风格像素人 (矩形示意)
+        ctx.translate(player.x + player.width/2, player.y + player.height);
+        ctx.scale(player.facing, 1); // 翻转
+        ctx.fillRect(-player.width/2, -player.height, player.width, player.height);
+        
+        // 头带 (红色)
+        ctx.fillStyle = 'red';
+        ctx.fillRect(-player.width/2, -player.height + 10, player.width, 10);
+        
+        // 拳头
+        ctx.fillStyle = '#ffccaa';
+        ctx.fillRect(10, -60, 20, 20);
+
+        ctx.restore();
+    }
+
+    function drawEnemies() {
+        enemies.forEach(e => {
+            if (!e.alive) return;
+            ctx.save();
+            // 阴影
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(e.x, GROUND_Y + e.height, e.width, 10);
+
+            // 身体
+            ctx.fillStyle = e.color;
+            ctx.fillRect(e.x, e.y + (e.height === 100 ? 0 : -40), e.width, e.height);
+            
+            // 墨镜/眼睛 (看起来像坏人)
+            ctx.fillStyle = 'black';
+            ctx.fillRect(e.x + 10, e.y + 20, e.width - 20, 10);
+            
+            // 血条 (如果是 Boss)
+            if (e.type === 'boss') {
+                ctx.fillStyle = 'red';
+                ctx.fillRect(e.x, e.y - 20, e.width, 5);
+                ctx.fillStyle = '#00ff00';
+                ctx.fillRect(e.x, e.y - 20, e.width * (e.hp/3), 5);
+            }
+            ctx.restore();
+        });
+    }
+
+    // === 战斗系统 ===
+    let combatEnemy = null;
+    let combatTimerInterval = null;
+
+    function startCombat(enemy) {
+        currentState = STATE.COMBAT;
+        combatEnemy = enemy;
+        
+        const modal = document.getElementById('combat-overlay');
+        const qName = document.getElementById('enemy-name');
+        const qText = document.getElementById('q-text');
+        const qOpts = document.getElementById('q-options');
+        const qTimer = document.getElementById('q-timer');
+
+        qName.innerText = `VS ${enemy.name}`;
+        modal.style.display = 'flex';
+
+        // 随机选题
+        const q = questions[Math.floor(Math.random() * questions.length)];
+        qText.innerText = q.q;
+        qOpts.innerHTML = '';
+
+        [...q.options].sort(()=>Math.random()-0.5).forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'combat-btn';
+            btn.innerText = opt;
+            btn.onclick = () => resolveCombat(opt === q.a, enemy);
+            qOpts.appendChild(btn);
+        });
+
+        // 倒计时
+        let timeLeft = 10.0;
+        qTimer.innerText = timeLeft;
+        
+        if(combatTimerInterval) clearInterval(combatTimerInterval);
+        combatTimerInterval = setInterval(() => {
+            timeLeft -= 0.1;
+            qTimer.innerText = timeLeft.toFixed(1);
+            if (timeLeft <= 0) {
+                resolveCombat(false, enemy); // 超时算输
+            }
+        }, 100);
+    }
+
+    function resolveCombat(win, enemy) {
+        clearInterval(combatTimerInterval);
+        document.getElementById('combat-overlay').style.display = 'none';
+        currentState = STATE.PLAYING;
+
+        if (win) {
+            // 玩家胜利：打击特效
+            enemy.hp--;
+            score += 100;
+            document.getElementById('score-val').innerText = score.toString().padStart(5, '0');
+            
+            // 击退效果
+            enemy.x += 100; 
+
+            if (enemy.hp <= 0) {
+                enemy.alive = false;
+                enemy.color = '#555'; // 变成尸体灰
+                // 可以加一个爆炸特效
+            }
+        } else {
+            // 玩家失败：受伤
+            player.hp -= 20;
+            player.state = 'hurt';
+            document.getElementById('hp-bar').style.width = `${player.hp}%`;
+            
+            // 玩家被击退
+            player.x -= 50;
+            
+            setTimeout(() => player.state = 'idle', 500);
+
+            if (player.hp <= 0) {
+                alert("GAME OVER. TRY AGAIN?");
+                location.reload();
+            }
+        }
+    }
+
+    // 启动游戏
+    resize();
+    gameLoop();
+
+</script>
+</body>
+</html>

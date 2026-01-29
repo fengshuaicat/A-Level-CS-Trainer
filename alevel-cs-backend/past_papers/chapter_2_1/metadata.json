@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1753012243562,
+    "title": "1 video  buffer",
+    "question": "/past_papers/chapter_2_1/question_1753012243262.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753012243558.png",
+    "solution": "Video Capture: The doorbell's camera captures video of the visitor.\r\nBuffer Storage: The captured video is temporarily stored in a buffer (usually in the doorbell's memory) to handle any delay in data transmission.\r\nData Transmission: The video data is transmitted from the buffer to the router via Wi-Fi.\r\nSmartphone Display: The router forwards the data to the user’s smartphone, allowing the video to be displayed in real-time.\r\nRewind Feature: Recent video data is kept in the buffer, enabling the user to rewind and view the captured footage without having to retrieve it from slower storage.\r\nSensor Data Storage: Readings from motion sensors are stored in the buffer until the microprocessor can process them.\r\nThis entire process ensures smooth video streaming and efficient data handling in the video doorbell system."
+  },
+  {
+    "id": 1753012541736,
+    "title": "2 sampling rate affect ",
+    "question": "/past_papers/chapter_2_1/question_1753012541734.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753012541733.png",
+    "solution": "1. Audio Quality\r\nHigher Sampling Rate: Increasing the sampling rate to 88.2 kHz means the microphone will capture audio at twice the frequency compared to 44.1 kHz.\r\n\r\nImproved Sound Detail: A higher sampling rate allows the doorbell to record more audio detail, especially higher frequencies, improving overall sound quality. This is particularly beneficial for capturing more accurate and clear sounds.\r\n\r\n2. Data Size and Storage\r\nLarger Audio Files: With a higher sampling rate, the amount of audio data generated per second increases. This will result in larger audio files for each recorded segment of video, as more samples are taken.\r\n\r\nIncreased Bandwidth Usage: The increased size of the audio data will demand more bandwidth to transmit the video with sound, potentially slowing down the transmission if the network or router is not fast enough.\r\n\r\n3. Processing Load\r\nMore Processing Power: The video doorbell’s microprocessor will need to handle more data per second, increasing the computational load. This may require more processing power or could lead to delays in processing the audio and video data simultaneously.\r\n\r\nBattery Consumption: If the video doorbell is battery-powered, the higher sampling rate may also cause higher power consumption due to the increased data processing and transmission.\r\n\r\n4. Potential Latency\r\nSlight Delay: With more data to process and transmit, there could be a slight increase in latency before the user receives the video and audio feed on their smartphone.\r\n\r\nSummary:\r\nChanging the sampling rate to 88.2 kHz improves audio quality by capturing more detailed sound, but it also increases the data size, processing load, and power consumption, which could affect the video doorbell's performance, especially in terms of storage, transmission speed, and battery life."
+  },
+  {
+    "id": 1753012779567,
+    "title": "3 real-time and on-demand bit streaming",
+    "question": "/past_papers/chapter_2_1/question_1753012779564.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753012779565.png",
+    "solution": "(i) Bit Streaming Definition:\r\nBit streaming refers to the continuous transmission of video or audio data in small, sequentially ordered packets (bits) over a network. This allows for real-time playback as the data is being received, without needing to wait for the entire file to be downloaded.\r\n\r\n(ii) Two Differences Between Real-time and On-demand Bit Streaming:\r\nTiming of Data Playback:\r\n\r\nReal-time Bit Streaming: Data is played as it is being received, typically without delay, and must be processed in real time (e.g., live video calls or live streaming).\r\n\r\nOn-demand Bit Streaming: Data is available for playback at any time upon user request. The user can pause, rewind, or skip to any part of the stream (e.g., watching a recorded video or movie).\r\n\r\nData Availability:\r\n\r\nReal-time Bit Streaming: The data must be transmitted and played instantly, with no buffering or delay. There is no ability to store or rewind the stream (e.g., watching a live event).\r\n\r\nOn-demand Bit Streaming: The data is typically pre-recorded and stored, allowing users to access and control the content whenever they want, including features like pausing and fast-forwarding."
+  },
+  {
+    "id": 1753016168743,
+    "title": " 4 thin-client ",
+    "question": "/past_papers/chapter_2_1/question_1753016168433.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753016168434.png",
+    "solution": "Minimal local processing power\tThe exam markers' devices do not need to run complex software locally. The software's core functions and data processing are handled on the server. This allows the markers to access and mark the exam papers without requiring powerful hardware on their end.\r\nDependent on server for data\tThe exam markers rely on the server to access the digitized exam papers, download them for marking, and upload the marked papers. All the exam data and processing (e.g., storing marks) are handled centrally on the server, reducing the need for local data storage.\r\nThese characteristics ensure that the software is efficient, as it minimizes the hardware requirements for exam markers, relying instead on the server to handle the heavier tasks like storing and processing exam papers."
+  },
+  {
+    "id": 1753016956009,
+    "title": "routers",
+    "question": "/past_papers/chapter_2_1/question_1753016956008.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753016956008.png",
+    "solution": "(i) Role of Routers in the Transmission of Data Through the Internet:\r\nRouters are networking devices that play a crucial role in directing and forwarding data packets between different networks on the internet. Their main functions are as follows:\r\n\r\nRouting Data: Routers determine the best possible path for data packets to travel from the source to the destination. They examine the destination IP address of each data packet and decide which route the packet should take to reach its final destination.\r\n\r\nForwarding Packets: After determining the best path, routers forward the data packets to the next network device or router. This process continues across multiple routers, as the packets pass through different networks, until they reach the destination.\r\n\r\nConnecting Networks: Routers connect different networks (e.g., local area networks, wide area networks) and manage the communication between them. They help route traffic efficiently between different subnets and networks, such as between a home network and the broader internet.\r\n\r\nTraffic Management: Routers help manage internet traffic by distributing the load across different paths, preventing congestion, and optimizing performance. They can also perform actions like prioritizing certain types of traffic (e.g., video streaming or VoIP) to ensure smooth communication.\r\n\r\nIn summary, routers ensure that data is efficiently and accurately transmitted through the internet by forwarding packets, selecting the best routes, and connecting different networks."
+  },
+  {
+    "id": 1753017891913,
+    "title": "star topology",
+    "question": "/past_papers/chapter_2_1/question_1753017891912.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753017891912.png",
+    "solution": "in a star topology, devices connect through a central switch or hub. Packet transmission:\r\n\r\nPacket Creation: The sender creates a packet with source and destination MAC addresses.\r\nSent to Central Device: The packet travels via Ethernet to the switch/hub.\r\nCentral Device Processing:\r\nSwitch: Forwards the packet to the destination port using its MAC address table.\r\nHub: Broadcasts the packet to all devices; only the target processes it.\r\nDelivery: The target device receives the packet; acknowledgment may follow.\r\nSwitches enable efficient, targeted forwarding; hubs broadcast less efficiently."
+  },
+  {
+    "id": 1753018373198,
+    "title": " Carrier Sense Multiple Access/Collision  Detection (CSMA/CD)",
+    "question": "/past_papers/chapter_2_1/question_1753018373158.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753018373159.png",
+    "solution": "(i) How CSMA/CD Manages a Collision\r\nWhen a collision is detected in an Ethernet network using Carrier Sense Multiple Access/Collision Detection (CSMA/CD):\r\n\r\nCollision Detection: Devices transmitting data detect a collision when signals interfere, causing a voltage spike on the shared medium.\r\nJam Signal and Backoff: The detecting device sends a jam signal to notify all devices of the collision, halting transmissions. Each device then waits for a random backoff period (based on the Binary Exponential Backoff algorithm) before attempting to retransmit, reducing the chance of further collisions.\r\n(ii) Two Drawbacks of CSMA/CD\r\nInefficiency with High Traffic: CSMA/CD performance degrades in high-traffic networks, as frequent collisions increase delays due to repeated backoff and retransmission attempts.\r\nLimited Scalability: It is less effective in large networks with many devices or long cable lengths, as collision detection becomes less reliable and propagation delays increase."
+  },
+  {
+    "id": 1753019060454,
+    "title": " peer-to-peer ",
+    "question": "/past_papers/chapter_2_1/question_1753019060453.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753019060453.png",
+    "solution": "The BitTorrent protocol is a decentralized method for transferring files over the internet. Unlike traditional client-server models, it enables peer-to-peer (P2P) file sharing, where users (peers) directly exchange file segments with each other. Each peer downloads and uploads parts of the file simultaneously, distributing the load across multiple users. This approach enhances efficiency, reduces reliance on a central server, and speeds up file transfers, especially for large files, as more peers contribute to the sharing process."
+  },
+  {
+    "id": 1753258502673,
+    "title": "LAN & WAN",
+    "question": "/past_papers/chapter_2_1/question_1753258502363.png",
+    "answer": "/past_papers/chapter_2_1/answer_1753258502364.png",
+    "solution": "LAN: Small, fast, single control, private (e.g., home Wi-Fi).\r\nWAN: Large, slower, multi-control, shared (e.g., internet)."
+  },
+  {
+    "id": 1757919802997,
+    "title": "LAN & WAN2",
+    "question": "/past_papers/chapter_2_1/question_1757919802960.png",
+    "answer": "/past_papers/chapter_2_1/answer_1757919802968.png",
+    "solution": "WAN: Large, slower, multi-control, shared (e.g., internet).\r\nLAN: Small, fast, single control, private (e.g., home Wi-Fi)."
+  }
+]

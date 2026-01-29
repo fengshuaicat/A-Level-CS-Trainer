@@ -1,0 +1,42 @@
+[
+  {
+    "paperId": 1759936517228,
+    "title": "3 threats",
+    "studentName": "冯帅",
+    "studentClass": "PREA",
+    "answer": "virus and hacking",
+    "timestamp": 1760058761600
+  },
+  {
+    "paperId": 1760446257089,
+    "title": " Threat  Prevention method",
+    "studentName": "Rebecca",
+    "studentClass": "AS",
+    "answer": "virus, malicious software that replicates itself and can corrupt data, firewall\nhacker, unauthorised access to the computer with malicious intent, firewall",
+    "timestamp": 1760452459822
+  },
+  {
+    "paperId": 1760446458033,
+    "title": "encryption",
+    "studentName": "Rebecca",
+    "studentClass": "AS",
+    "answer": "The data is encode, it is used because it cannot be understand if intercepted without the decryption key.",
+    "timestamp": 1760533958950
+  },
+  {
+    "paperId": 1760446654428,
+    "title": "1_secure",
+    "studentName": "Rebecca",
+    "studentClass": "AS",
+    "answer": "To stop the data being lose, and make sure it can be recovered, and to prevent unauthorised access",
+    "timestamp": 1760534671905
+  },
+  {
+    "paperId": 1760447063681,
+    "title": "Range Presence Length check",
+    "studentName": "Rebecca",
+    "studentClass": "AS",
+    "answer": "range check: for example, given within 3 mouth\npresence check: make sure the data has been enter\nlength check: for example, there must be at least 8 characters",
+    "timestamp": 1760537056832
+  }
+]

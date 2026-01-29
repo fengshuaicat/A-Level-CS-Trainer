@@ -1,0 +1,181 @@
+[
+  {
+    "paperId": 1753012243562,
+    "title": "1 video  buffer",
+    "studentName": "冯帅",
+    "studentClass": "PREA",
+    "answer": "I cant do anything xxx",
+    "timestamp": 1759545037104,
+    "score": 55
+  },
+  {
+    "paperId": 1753012541736,
+    "title": "2 sampling rate affect ",
+    "studentName": "冯帅",
+    "studentClass": "PREA",
+    "answer": "testxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "timestamp": 1757935226224,
+    "score": 100
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "王逸杰",
+    "studentClass": "AS",
+    "answer": "王逸杰是全世界全宇宙最帅最聪明的大帅哥",
+    "timestamp": 1758528473850
+  },
+  {
+    "paperId": 1753012243562,
+    "title": "1 video  buffer",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "1.The video transmitted the buffer to the router via Wi-Fi.\n2.Readings from motion sensors are stored in the buffer until the microprocessor can process them.",
+    "timestamp": 1757985042714,
+    "score": 95
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "张立",
+    "studentClass": "AS",
+    "answer": "n a star topology, devices connect through a central switch or hub. Packet transmission:\n\nPacket Creation: The sender creates a packet with source and destination MAC addresses.\nSent to Central Device: The packet travels via Ethernet to the switch/hub.\nCentral Device Processing:\nSwitch: Forwards the packet to the destination port using its MAC address table.\nHub: Broadcasts the packet to all devices; only the target processes it.\nDelivery: The target device receives the packet; acknowledgment may follow.\nSwitches enable efficient, targeted forwarding; hubs broadcast less efficiently.",
+    "timestamp": 1757985076173
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "Sending computer transmits packets directly to switch device.\nSwitch device checks destination address of packet and forwords directly to that devices.",
+    "timestamp": 1757985418953
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "寇云尧",
+    "studentClass": "AS",
+    "answer": "11",
+    "timestamp": 1757985355446
+  },
+  {
+    "paperId": 1753012541736,
+    "title": "2 sampling rate affect ",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "1.Data transmission to user's phone will take longer by the more data to deliver.\n2.The secondary storage device will transmitted faster.",
+    "timestamp": 1757985370461
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "seeding computer transmits packet directly to switch device \nswitch device checks destination address of packet and forwards directly to that device",
+    "timestamp": 1757985847871
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "饶华旭",
+    "studentClass": "AS",
+    "answer": "1.sending computer transmits packjets directly to switch/router/central device\n2.switch/router/central device checks destination address of packet and forwards directly to that device",
+    "timestamp": 1757985848919
+  },
+  {
+    "paperId": 1753012779567,
+    "title": "3 real-time and on-demand bit streaming",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "i.1.Keeping ordered flow of bits over by a communication pathway.\n\nii.1.Real-time cannot be re-watched and on-demand bit steaming can be paused.\n2.Real-time paly continually and on-demand download section and cannot paly before the downloading section.",
+    "timestamp": 1757985921067
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "刘浩天",
+    "studentClass": "AS",
+    "answer": "The sending computer transmits packets to the switch, which then checks the destination address of the packets and forwards them directly to the target device",
+    "timestamp": 1757985977211
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "In star topology,all device connect by cental router, when packets need transmit to each others, at first the sending divice will sending packets to the central device, then the cenral divice  will transmit the packets to the sending divice which central device checks the destination address of the data packet and forwards it directly to the target device.",
+    "timestamp": 1757986362557
+  },
+  {
+    "paperId": 1753016168743,
+    "title": " 4 thin-client ",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "1.Data is not stored on the client computer    Exam papers are stored on the server and not on the 2.examiner's computer is reliant on access to server   Examiners cannot mark if their device cannot access the server",
+    "timestamp": 1757986662962
+  },
+  {
+    "paperId": 1753017891913,
+    "title": "star topology",
+    "studentName": "糖夹心",
+    "studentClass": "AS",
+    "answer": "The computer sends a data packet to the switch, which checks the sending address in the packet and then sends it to the target device.",
+    "timestamp": 1757986838973
+  },
+  {
+    "paperId": 1753012243562,
+    "title": "1 video  buffer",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "caputured video is transmitted to buffer\nstore readings from motion sensor",
+    "timestamp": 1758528695717
+  },
+  {
+    "paperId": 1753012243562,
+    "title": "1 video  buffer",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "Capture video is transmitted to buffer,then video is transmitted from buffer to smartphone.\nStore recent data in a buffer for the user to rewind instead of storing everything in secondary storage.",
+    "timestamp": 1758528877750
+  },
+  {
+    "paperId": 1753258502673,
+    "title": "LAN & WAN",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "LAN\nsmall geographical area\ndoesn't use internet to transmit within the building",
+    "timestamp": 1758591388935
+  },
+  {
+    "paperId": 1757919802997,
+    "title": "LAN & WAN2",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "In a WAN devices can connect over a larger geographical area in a LAN devices connect over a smaller geographical area\nA WAN may use non-dedicated hardware the hardware in a LAN is usually dedicated",
+    "timestamp": 1758591575200
+  },
+  {
+    "paperId": 1753016168743,
+    "title": " 4 thin-client ",
+    "studentName": "何希贤",
+    "studentClass": "PREA",
+    "answer": "thin client\nthin client need Internet.\nand thin client need data from server.\nthick client\nthick client not necessarily Internet(not need).\nand thick client data from self.",
+    "timestamp": 1760664244057
+  },
+  {
+    "paperId": 1753016168743,
+    "title": " 4 thin-client ",
+    "studentName": "胡家信",
+    "studentClass": "PREA",
+    "answer": "1 Thin-client depends on a central server for processing rather than local processment.In this software,the exam markers playes the role of server and processes the files and send it back\n2 Data is not stored on the client computer,In this software, the assessment board stored the digitised papers on a server rather than itself",
+    "timestamp": 1760665119107
+  },
+  {
+    "paperId": 1753016168743,
+    "title": " 4 thin-client ",
+    "studentName": "Willliam",
+    "studentClass": "PREA",
+    "answer": "The thin client is the simple client people who can use todo something that is not to hard and no need to much CPU power , and the things is upload on the client , it means the thin client can't working with out internet .",
+    "timestamp": 1760665147087
+  }
+]

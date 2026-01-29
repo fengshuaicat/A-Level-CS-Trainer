@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Ms. Byte's Voice Boot Camp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        /* 保持原有的黑板风格 CSS，增加嘴部动画优化 */
+        :root { --board-bg: #2d3436; --board-frame: #5d4037; --chalk-white: #f1f2f6; --chalk-yellow: #ffeaa7; --bg-wall: #dfe6e9; }
+        * { box-sizing: border-box; }
+        body { margin: 0; height: 100vh; background: var(--bg-wall); font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        
+        .classroom { display: flex; width: 95%; max-width: 1200px; height: 90vh; gap: 20px; }
+
+        /* 左侧教练区 */
+        .coach-area { flex: 0 0 320px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; }
+        
+        /* 头像容器 */
+        .avatar-container { width: 280px; height: 280px; position: relative; z-index: 2; }
+        .coach-img { width: 100%; height: 100%; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); transition: transform 0.2s; }
+
+        /* 气泡 */
+        .speech-bubble {
+            position: absolute; top: 5%; background: #fff; border-radius: 30px; padding: 20px; width: 300px;
+            font-family: 'Patrick Hand', cursive; font-size: 1.2rem; color: #333; text-align: center;
+            opacity: 0; transform: translateY(20px); transition: 0.5s; border: 2px solid #333; z-index: 3;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); pointer-events: none;
+        }
+        .speech-bubble::after { content: ''; position: absolute; bottom: -15px; left: 50%; border-width: 15px 15px 0; border-style: solid; border-color: #333 transparent transparent; transform: translateX(-50%); }
+        .speech-bubble.show { opacity: 1; transform: translateY(0); }
+
+        /* 讲台 */
+        .podium { width: 100%; height: 120px; background: #8d6e63; border-radius: 10px 10px 0 0; border-bottom: 10px solid #5d4037; z-index: 1; margin-top: -40px; position: relative; }
+        
+        /* 开关声音按钮 */
+        .voice-toggle {
+            position: absolute; bottom: 10px; right: 10px;
+            background: rgba(0,0,0,0.2); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;
+        }
+
+        /* 右侧黑板 */
+        .blackboard-container { flex: 1; background: var(--board-frame); padding: 15px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
+        .blackboard { 
+            background-color: #2b3a42; flex: 1; padding: 30px; color: var(--chalk-white); 
+            font-family: 'Caveat', cursive; font-size: 1.8rem; display: flex; flex-direction: column; overflow-y: auto;
+            border: 2px solid #444; border-radius: 4px;
+        }
+        .chalk-title { color: var(--chalk-yellow); font-size: 2.5rem; text-align: center; border-bottom: 2px dashed rgba(255,255,255,0.3); margin-bottom: 20px; }
+        .input-area { margin-top: auto; display: flex; gap: 10px; }
+        textarea { flex: 1; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); color: white; font-family: 'Caveat', cursive; font-size: 1.5rem; padding: 10px; resize: none; height: 80px; }
+        button { background: var(--chalk-yellow); border: none; padding: 0 30px; font-family: 'Patrick Hand'; font-size: 1.5rem; cursor: pointer; transform: rotate(-2deg); }
+        button:hover { transform: scale(1.05); }
+
+        /* 动画 */
+        .bounce { animation: bounce 0.4s infinite alternate; }
+        .shake { animation: shake 0.1s infinite; }
+        @keyframes bounce { to { transform: translateY(-5px); } }
+        @keyframes shake { 0% { transform: rotate(-2deg); } 100% { transform: rotate(2deg); } }
+    </style>
+</head>
+<body>
+
+<div class="classroom">
+    <div class="coach-area">
+        <div class="speech-bubble show" id="bubble">Initializing voice module...</div>
+        
+        <div class="avatar-container">
+            <img id="coach-img" class="coach-img" src="" alt="Coach">
+        </div>
+
+        <div class="podium">
+            <div style="text-align:center; color:rgba(255,255,255,0.4); padding-top:15px; font-family:'Patrick Hand'; letter-spacing: 2px;">MS. BYTE</div>
+            <button class="voice-toggle" onclick="toggleSound()" id="sound-btn">Sound: ON</button>
+        </div>
+    </div>
+
+    <div class="blackboard-container">
+        <div class="blackboard">
+            <div class="chalk-title" id="topic">1.1 Data Representation</div>
+            <div id="q-text" style="margin-bottom:20px;">Loading...</div>
+            <div id="feedback-log" style="flex:1; color:#aaddff; border-left:3px solid #555; padding-left:10px; font-size:1.4rem;"></div>
+            
+            <div class="input-area">
+                <textarea id="user-input" placeholder="Type answer here..."></textarea>
+                <button onclick="submitAnswer()">Check</button>
+            </div>
+        </div>
+        <div style="position:absolute; bottom:20px; right:20px; width:60px; height:30px; background:#333; transform:rotate(10deg); cursor:pointer;" onclick="nextQ()" title="Next"></div>
+    </div>
+</div>
+
+<script>
+    // === 1. 配置与状态 ===
+    const avatarBase = "https://api.dicebear.com/9.x/avataaars/svg?seed=MsByte&clothing=blazerAndShirt&top=longHairBigHair";
+    // 定义不同情绪的基础 URL 参数 (注意：不含 mouth，mouth 由口型动画控制)
+    const emotions = {
+        normal: "&eyes=default&eyebrows=default",
+        happy:  "&eyes=happy&eyebrows=raisedExcited",
+        angry:  "&eyes=angry&eyebrows=angry",
+        think:  "&eyes=wink&eyebrows=default",
+        shock:  "&eyes=surprised&eyebrows=up"
+    };
+
+    let currentEmotion = 'normal';
+    let isSpeaking = false;
+    let speechInterval = null;
+    let soundEnabled = true;
+    let synth = window.speechSynthesis;
+    let voice = null;
+
+    // === 2. 语音与口型核心引擎 ===
+    
+    // 初始化语音 (尝试获取英文女声)
+    function initVoice() {
+        const voices = synth.getVoices();
+        // 优先找 Google US English, 或 Microsoft Zira, 或任意英文女声
+        voice = voices.find(v => v.name.includes('Google US English')) || 
+                voices.find(v => v.name.includes('Zira')) || 
+                voices.find(v => v.lang.includes('en') && v.name.includes('Female')) ||
+                voices.find(v => v.lang.includes('en'));
+    }
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = initVoice;
+    }
+
+    // 说话功能
+    function say(text, emotion = 'normal') {
+        // 1. 更新文字气泡
+        const bubble = document.getElementById('bubble');
+        bubble.classList.remove('show');
+        setTimeout(() => {
+            bubble.innerText = text;
+            bubble.classList.add('show');
+        }, 100);
+
+        // 2. 设定基础表情
+        currentEmotion = emotion;
+        updateAvatar(false); // 闭嘴状态
+
+        if (!soundEnabled) return;
+
+        // 3. 停止之前的语音
+        synth.cancel();
+        clearInterval(speechInterval);
+
+        // 4. 构造语音
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.voice = voice;
+        
+        // 根据情绪调整语音参数
+        if (emotion === 'angry') {
+            utter.rate = 1.3;  // 语速快
+            utter.pitch = 0.8; // 压低声音
+            utter.volume = 1.0;
+        } else if (emotion === 'happy') {
+            utter.rate = 1.1;
+            utter.pitch = 1.4; // 声音上扬
+        } else {
+            utter.rate = 1.0;
+            utter.pitch = 1.1;
+        }
+
+        // 5. 绑定事件：开始说话 -> 启动口型动画
+        utter.onstart = () => {
+            isSpeaking = true;
+            document.getElementById('coach-img').classList.add(emotion === 'angry' ? 'shake' : 'bounce');
+            startLipSync();
+        };
+
+        // 绑定事件：说完 -> 停止动画，闭嘴
+        utter.onend = () => {
+            isSpeaking = false;
+            clearInterval(speechInterval);
+            document.getElementById('coach-img').classList.remove('shake', 'bounce');
+            updateAvatar(false); // 回到闭嘴
+        };
+
+        synth.speak(utter);
+    }
+
+    // 口型同步动画 (Lip Sync Simulation)
+    function startLipSync() {
+        let mouthOpen = false;
+        // 每 150ms 切换一次张嘴/闭嘴
+        speechInterval = setInterval(() => {
+            mouthOpen = !mouthOpen;
+            // 随机一点变化，不仅仅是简单的开关，让它看起来像在说话
+            if(Math.random() > 0.7) mouthOpen = true; 
+            updateAvatar(mouthOpen);
+        }, 150);
+    }
+
+    // 更新头像 URL
+    function updateAvatar(mouthOpen) {
+        const img = document.getElementById('coach-img');
+        let mouthParam = "&mouth=default"; // 默认闭嘴/微笑
+        
+        if (mouthOpen) {
+            // 说话时的口型 (随机几种张嘴形状)
+            const talkingMouths = ['smile', 'scream', 'grimace']; 
+            const rand = talkingMouths[Math.floor(Math.random() * talkingMouths.length)];
+            mouthParam = `&mouth=${rand}`;
+        } else {
+            // 闭嘴时的口型 (根据情绪)
+            if(currentEmotion === 'angry') mouthParam = "&mouth=serious";
+            else if(currentEmotion === 'happy') mouthParam = "&mouth=smile";
+            else mouthParam = "&mouth=twinkle";
+        }
+
+        // 组合 URL (DiceBear 的 URL 变化会触发图片刷新)
+        img.src = avatarBase + emotions[currentEmotion] + mouthParam;
+    }
+
+    function toggleSound() {
+        soundEnabled = !soundEnabled;
+        document.getElementById('sound-btn').innerText = soundEnabled ? "Sound: ON" : "Sound: OFF";
+        if(!soundEnabled) synth.cancel();
+    }
+
+    // === 3. 游戏逻辑 (简化版) ===
+    const questions = [
+        { q: "Why is Hexadecimal used in CS?", a: ["human", "read", "short", "error", "debug"], hint: "It's not for computers, it's for us.", full: "It makes binary easier for humans to read and debug." },
+        { q: "What is a pixel?", a: ["picture", "element", "smallest", "unit", "color"], hint: "Think about the smallest dot on a screen.", full: "The smallest addressable element of a picture." }
+    ];
+    let qIdx = 0;
+
+    function loadQ() {
+        const q = questions[qIdx];
+        document.getElementById('q-text').innerText = q.q;
+        document.getElementById('feedback-log').innerHTML = "";
+        document.getElementById('user-input').value = "";
+        // 延迟一点说话，等待头像加载
+        setTimeout(() => say("Here is a new question. Think carefully!", "normal"), 500);
+    }
+
+    function submitAnswer() {
+        const input = document.getElementById('user-input').value.toLowerCase();
+        const q = questions[qIdx];
+        
+        // 简单关键词匹配
+        const hits = q.a.filter(k => input.includes(k)).length;
+        const log = document.getElementById('feedback-log');
+
+        if (hits >= 2) {
+            log.innerHTML += `<div style="color:#55efc4">✓ Correct!</div>`;
+            say("Fantastic! You nailed the key concepts. I'm so proud!", "happy");
+        } else if (hits > 0) {
+            log.innerHTML += `<div style="color:#ffeaa7">⚠ Close. ${q.hint}</div>`;
+            say(`You are getting there, but listen. ${q.hint}`, "think");
+        } else {
+            log.innerHTML += `<div style="color:#ff7675">✗ Try again.</div>`;
+            say("Oh dear. That is completely wrong! Are you guessing?", "angry");
+        }
+    }
+
+    function nextQ() {
+        qIdx = (qIdx + 1) % questions.length;
+        loadQ();
+    }
+
+    // 启动
+    updateAvatar(false);
+    loadQ();
+    // 确保语音加载
+    setTimeout(initVoice, 1000);
+
+</script>
+</body>
+</html>

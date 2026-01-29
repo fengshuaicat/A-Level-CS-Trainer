@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1752399714290,
+    "title": "1 bitmapped image  Pixel& File header",
+    "question": "/past_papers/chapter_1_2/question_1752399714286.png",
+    "answer": "/past_papers/chapter_1_2/answer_1752399714288.png",
+    "solution": "Pixel:\r\nA pixel is the smallest unit of a bit-map image, representing a single point in a grid. It stores color information (e.g., RGB values) based on bit depth, and the total number of pixels determines the image’s resolution.\r\n\r\nFile header:\r\nA file header is metadata at the start of a bit-map image file, containing information like file format (e.g., JPEG), resolution, and bit depth. It allows software to interpret and display the image correctly."
+  },
+  {
+    "id": 1752400694800,
+    "title": "1.2 bitmapped image Pixel& bit bytes",
+    "question": "/past_papers/chapter_1_2/question_1752400694799.png",
+    "answer": "/past_papers/chapter_1_2/answer_1752400694799.png",
+    "solution": "略"
+  },
+  {
+    "id": 1752401216425,
+    "title": "1.3 bitmapped image lossless compression",
+    "question": "/past_papers/chapter_1_2/question_1752401216386.png",
+    "answer": "/past_papers/chapter_1_2/answer_1752401216387.png",
+    "solution": "Lossless compression method: Run-Length Encoding (RLE)\r\n\r\nDescription:\r\n\r\nRLE reduces file size by replacing consecutive identical pixels in a bit-map image with a single value and a count. For example, 10 white pixels are encoded as \"10 white\" instead of storing each pixel, saving space while preserving all data for exact decompression.\r\n\r\n无损压缩方法：运行长度编码（RLE）\r\n\r\n描述：\r\n\r\nRLE 通过将位图图像中连续的相同像素替换为一个值和计数来减小文件大小。例如，10 个白色像素编码为“10 个白色”，而不是存储每个像素，节省空间，同时保留所有数据以确保精确解压。"
+  },
+  {
+    "id": 1752401943749,
+    "title": "1.4 colours hexadecimal",
+    "question": "/past_papers/chapter_1_2/question_1752401943748.png",
+    "answer": "/past_papers/chapter_1_2/answer_1752401943747.png",
+    "solution": "(i) Convert FC to denary:\r\nFC (hexadecimal) = 15×16¹ + 12×16⁰ = 240 + 12 = 252.\r\nAnswer: 252 [1 mark]\r\n(ii) Add 15 to 00100011 in binary:\r\n\r\nGreen (binary): 00100011 = 35 (denary).\r\nAdd 15 (denary) = 00001111 (binary).\r\n\r\nAnswer: 00110010 [3 marks]"
+  },
+  {
+    "id": 1752458783773,
+    "title": "1.5 two's complement binary subtract",
+    "question": "/past_papers/chapter_1_2/question_1752458783769.png",
+    "answer": "/past_papers/chapter_1_2/answer_1752458783771.png",
+    "solution": "Omitted"
+  },
+  {
+    "id": 1752459007294,
+    "title": "1.6 copyright",
+    "question": "/past_papers/chapter_1_2/question_1752459007293.png",
+    "answer": "/past_papers/chapter_1_2/answer_1752459007294.png",
+    "solution": "Omitted"
+  }
+]

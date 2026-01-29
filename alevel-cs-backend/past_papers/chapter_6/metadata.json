@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1759936104515,
+    "title": "1 security and privacy",
+    "question": "/past_papers/chapter_6/question_1759936104315.png",
+    "answer": "/past_papers/chapter_6/answer_1759936104418.png",
+    "markScheme": "Security protects data against loss\r\nPrivacy protects data against unauthorised access"
+  },
+  {
+    "id": 1759936311078,
+    "title": "2 measure restrict the access",
+    "question": "/past_papers/chapter_6/question_1759936310915.png",
+    "answer": "/past_papers/chapter_6/answer_1759936311076.png",
+    "markScheme": "• Two factor authentication\r\n• Biometric passwords\r\n• Key Card Access\r\n• Firewall"
+  },
+  {
+    "id": 1759936517228,
+    "title": "3 threats",
+    "question": "/past_papers/chapter_6/question_1759936517135.png",
+    "answer": "/past_papers/chapter_6/answer_1759936517214.png",
+    "markScheme": "\r\n• Malware // viruses // spyware // by example\r\n• Hacking\r\n• Phishing\r\n• Pharming"
+  },
+  {
+    "id": 1760359039267,
+    "title": "Parity check",
+    "question": "/past_papers/chapter_6/question_1760359039082.png",
+    "answer": "/past_papers/chapter_6/answer_1760359039202.png",
+    "markScheme": "odd or even,7-bits,odd,block,byte"
+  },
+  {
+    "id": 1760445876878,
+    "title": "data and its computer system secure",
+    "question": "/past_papers/chapter_6/question_1760445876844.png",
+    "answer": "/past_papers/chapter_6/answer_1760445876862.png",
+    "markScheme": "Data \r\n Data needs protecting from someone amending / deleting or taking it.\r\nComputer System \r\n Computer system need protecting to stop people for example, installing\r\n malware or damaging the system."
+  },
+  {
+    "id": 1760446257089,
+    "title": " Threat  Prevention method",
+    "question": "/past_papers/chapter_6/question_1760446257033.png",
+    "answer": "/past_papers/chapter_6/answer_1760446257051.png",
+    "markScheme": " Threat:Virus ,Description:Malicious software that replicates itself and can corrupt data . Prevention method:Anti-virus / Firewall / Anti-malware\r\n Threat:Hacker ,Description:Unauthorised access to the computer with malicious intent  . Prevention method:Firewall / strong or biometric passwords / user \r\npermissions "
+  },
+  {
+    "id": 1760446458033,
+    "title": "encryption",
+    "question": "/past_papers/chapter_6/question_1760446458009.png",
+    "answer": "/past_papers/chapter_6/answer_1760446458031.png",
+    "markScheme": "Data is turned into cipher text // Data is encoded.\r\nUsed so that it cannot be understood if intercepted without the decryption key."
+  },
+  {
+    "id": 1760446654428,
+    "title": "1_secure",
+    "question": "/past_papers/chapter_6/question_1760446654408.png",
+    "answer": "/past_papers/chapter_6/answer_1760446654426.png",
+    "markScheme": "To stop the data being lost / corrupted / amended.\r\nTo make sure it can be recovered.\r\nTo prevent unauthorised access."
+  },
+  {
+    "id": 1760447063681,
+    "title": "Range Presence Length check",
+    "question": "/past_papers/chapter_6/question_1760447063643.png",
+    "answer": "/past_papers/chapter_6/answer_1760447063662.png",
+    "markScheme": "Range check:\r\n  Make sure it is after and before a specific date // e.g. between 1900 and\r\n today's date // check month is between 1 and 12 // check day is\r\n between 1 and month end\r\n Presence check: \r\n Make sure the date of birth has been entered\r\n Length check: \r\n Make sure there are at least 1 for day, 1 for month, 2/4 for year // must\r\n be 8 characters"
+  }
+]

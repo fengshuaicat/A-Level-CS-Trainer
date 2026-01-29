@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Labyrinth - A-Level RPG</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #game-container {
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        canvas {
+            background: #252525;
+            display: block;
+            border-radius: 4px;
+        }
+
+        /* 题目弹窗 UI */
+        #quiz-modal {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            background: rgba(20, 20, 35, 0.95);
+            border: 2px solid #00bcd4;
+            padding: 20px;
+            border-radius: 10px;
+            display: none; /* 默认隐藏 */
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+            z-index: 100;
+        }
+
+        #quiz-modal h3 { margin-top: 0; color: #00bcd4; }
+        #quiz-question { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+        .option-btn:hover { background: #00bcd4; color: #000; }
+
+        /* HUD */
+        #hud {
+            position: absolute;
+            top: 10px; left: 10px;
+            font-family: monospace;
+            font-size: 16px;
+            pointer-events: none;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        /* 移动端控制提示 */
+        .controls-hint {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <div id="hud">
+        KEYS: [←] [→] Move | [Space/↑] Jump<br>
+        SECTOR: 1.1 Data Rep | GATES OPENED: <span id="score-val">0</span>/3
+    </div>
+
+    <div id="quiz-modal">
+        <h3 id="quiz-title">SECURITY GATE LOCKED</h3>
+        <p id="quiz-question">Question goes here...</p>
+        <div class="options-grid" id="quiz-options">
+            </div>
+    </div>
+    
+    <div class="controls-hint">Designed for A-Level CS Trainer</div>
+</div>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const modal = document.getElementById('quiz-modal');
+    const scoreEl = document.getElementById('score-val');
+
+    // --- 游戏配置 ---
+    const TILE_SIZE = 40;
+    const GRAVITY = 0.6;
+    const JUMP_FORCE = -12;
+    const SPEED = 5;
+
+    // --- 关卡地图设计 (0=空, 1=墙/地, 2=激光门(题目), 3=终点, 9=玩家起点) ---
+    // 这是一个简单的 20x15 网格 (800x600)
+    const levelMap = [
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,3,0,0,1],
+        [1,0,9,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1],
+        [1,1,1,1,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,1], // Gate 1
+        [1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,2,0,0,0,1], // Gate 2
+        [1,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,2,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,1], // Gate 3
+        [1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ];
+
+    // --- 题目数据 (对应 Gate ID) ---
+    // Gate 的 id 是根据它们在地图中出现的顺序分配的 (0, 1, 2...)
+    const puzzles = [
+        {
+            q: "Convert Binary 0000 1101 to Decimal.",
+            options: ["13", "14", "11", "15"],
+            answer: "13",
+            solved: false
+        },
+        {
+            q: "Which is a Lossy compression format?",
+            options: ["PNG", "FLAC", "ZIP", "JPEG"],
+            answer: "JPEG",
+            solved: false
+        },
+        {
+            q: "Logic Gate: 1 AND 0 = ?",
+            options: ["1", "0", "True", "Null"],
+            answer: "0",
+            solved: false
+        }
+    ];
+
+    // --- 游戏对象 ---
+    const player = {
+        x: 0, y: 0, width: 30, height: 30,
+        vx: 0, vy: 0,
+        color: '#00bcd4',
+        grounded: false
+    };
+
+    let keys = {};
+    let gameActive = true; // 是否在游戏中 (弹窗时为 false)
+    let gatesSolved = 0;
+    let currentGateIndex = -1; // 当前触发的门
+
+    // --- 初始化 ---
+    function init() {
+        // 找到玩家起点
+        for(let r=0; r<levelMap.length; r++) {
+            for(let c=0; c<levelMap[r].length; c++) {
+                if(levelMap[r][c] === 9) {
+                    player.x = c * TILE_SIZE + 5;
+                    player.y = r * TILE_SIZE + 5;
+                    levelMap[r][c] = 0; // 清除起点标记
+                }
+            }
+        }
+        requestAnimationFrame(gameLoop);
+    }
+
+    // --- 输入监听 ---
+    window.addEventListener('keydown', e => keys[e.code] = true);
+    window.addEventListener('keyup', e => keys[e.code] = false);
+
+    // --- 游戏循环 ---
+    function gameLoop() {
+        if (gameActive) {
+            update();
+            draw();
+        }
+        requestAnimationFrame(gameLoop);
+    }
+
+    function update() {
+        // 1. 水平移动
+        if (keys['ArrowLeft'] || keys['KeyA']) player.vx = -SPEED;
+        else if (keys['ArrowRight'] || keys['KeyD']) player.vx = SPEED;
+        else player.vx = 0;
+
+        player.x += player.vx;
+        checkCollision('x');
+
+        // 2. 垂直移动 (重力 & 跳跃)
+        if ((keys['ArrowUp'] || keys['Space'] || keys['KeyW']) && player.grounded) {
+            player.vy = JUMP_FORCE;
+            player.grounded = false;
+        }
+
+        player.vy += GRAVITY;
+        player.y += player.vy;
+        player.grounded = false; // 假设在空中，碰撞检测会修正
+        checkCollision('y');
+
+        // 边界保护
+        if(player.y > canvas.height) resetPlayer(); 
+    }
+
+    // --- 碰撞检测 (AABB) ---
+    function checkCollision(axis) {
+        // 计算玩家所在的网格坐标范围
+        let left = Math.floor(player.x / TILE_SIZE);
+        let right = Math.floor((player.x + player.width) / TILE_SIZE);
+        let top = Math.floor(player.y / TILE_SIZE);
+        let bottom = Math.floor((player.y + player.height) / TILE_SIZE);
+
+        // 遍历玩家覆盖的所有瓦片
+        for (let r = top; r <= bottom; r++) {
+            for (let c = left; c <= right; c++) {
+                if (r < 0 || r >= levelMap.length || c < 0 || c >= levelMap[0].length) continue;
+
+                const tile = levelMap[r][c];
+
+                // 1. 墙壁碰撞 (Tile = 1)
+                if (tile === 1) {
+                    if (axis === 'x') {
+                        if (player.vx > 0) player.x = c * TILE_SIZE - player.width - 0.1;
+                        else if (player.vx < 0) player.x = (c + 1) * TILE_SIZE + 0.1;
+                        player.vx = 0;
+                    } else {
+                        if (player.vy > 0) { // 落地
+                            player.y = r * TILE_SIZE - player.height - 0.1;
+                            player.grounded = true;
+                            player.vy = 0;
+                        } else if (player.vy < 0) { // 顶头
+                            player.y = (r + 1) * TILE_SIZE + 0.1;
+                            player.vy = 0;
+                        }
+                    }
+                }
+                
+                // 2. 激光门 (Tile = 2) -> 触发题目
+                else if (tile === 2) {
+                    // 简单的去重逻辑，找到这是第几个门
+                    let gateCount = 0;
+                    for(let rr=0; rr<levelMap.length; rr++){
+                        for(let cc=0; cc<levelMap[rr].length; cc++){
+                            if(rr===r && cc===c) triggerQuiz(gateCount, r, c);
+                            if(levelMap[rr][cc] === 2) gateCount++;
+                        }
+                    }
+                }
+
+                // 3. 终点 (Tile = 3)
+                else if (tile === 3) {
+                    if(gatesSolved === puzzles.length) {
+                        alert("LEVEL COMPLETE! System Restored.");
+                        resetPlayer(); // 这里应该跳转下一章
+                    } else {
+                        // 可选：提示需要解锁所有门
+                    }
+                }
+            }
+        }
+    }
+
+    // --- 题目触发逻辑 ---
+    function triggerQuiz(gateIndex, r, c) {
+        if (gateIndex >= puzzles.length) return; // 防止溢出
+        const puzzle = puzzles[gateIndex];
+        if (puzzle.solved) return; // 已经解开了
+
+        gameActive = false; // 暂停游戏
+        currentGateIndex = gateIndex;
+        
+        // 显示 UI
+        document.getElementById('quiz-title').innerText = `SECURITY GATE 0${gateIndex+1}`;
+        document.getElementById('quiz-question').innerText = puzzle.q;
+        const optsDiv = document.getElementById('quiz-options');
+        optsDiv.innerHTML = '';
+        
+        // 打乱选项
+        const shuffled = [...puzzle.options].sort(()=>Math.random()-0.5);
+        shuffled.forEach(opt => {
+            const btn = document.createElement('div');
+            btn.className = 'option-btn';
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(opt, r, c);
+            optsDiv.appendChild(btn);
+        });
+
+        modal.style.display = 'block';
+    }
+
+    function checkAnswer(selected, r, c) {
+        const puzzle = puzzles[currentGateIndex];
+        if (selected === puzzle.answer) {
+            // 答对
+            puzzle.solved = true;
+            gatesSolved++;
+            scoreEl.innerText = gatesSolved;
+            modal.style.display = 'none';
+            gameActive = true;
+            
+            // 消除地图上的门
+            levelMap[r][c] = 0; 
+        } else {
+            // 答错
+            alert("ACCESS DENIED. Security protocol reset.");
+            // 惩罚：可以扣血，或者把玩家弹开
+            modal.style.display = 'none';
+            gameActive = true;
+            player.x -= 50; // 弹开
+        }
+    }
+
+    function resetPlayer() {
+        // 简单重置回左上角附近，实际应记录 startPos
+        player.x = 80; player.y = 80; player.vx = 0; player.vy = 0;
+    }
+
+    // --- 渲染 ---
+    function draw() {
+        // 1. 背景
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 2. 地图绘制
+        for (let r = 0; r < levelMap.length; r++) {
+            for (let c = 0; c < levelMap[r].length; c++) {
+                const tile = levelMap[r][c];
+                const x = c * TILE_SIZE;
+                const y = r * TILE_SIZE;
+
+                if (tile === 1) {
+                    // 墙壁 (深灰 + 绿色边框 模拟电路板)
+                    ctx.fillStyle = '#2d2d2d';
+                    ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+                    ctx.strokeStyle = '#333';
+                    ctx.strokeRect(x, y, TILE_SIZE, TILE_SIZE);
+                } else if (tile === 2) {
+                    // 激光门 (红色发光)
+                    ctx.fillStyle = 'rgba(255, 51, 51, 0.8)';
+                    ctx.fillRect(x+10, y, 20, TILE_SIZE); // 细一点
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = 'red';
+                } else if (tile === 3) {
+                    // 终点 (绿色传送门)
+                    ctx.fillStyle = '#00ff41';
+                    ctx.beginPath();
+                    ctx.arc(x + TILE_SIZE/2, y + TILE_SIZE/2, 15, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = '#00ff41';
+                }
+                ctx.shadowBlur = 0; // 重置发光
+            }
+        }
+
+        // 3. 玩家绘制 (Bit Bot)
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+        
+        // 简单的眼睛，让它不像个方块
+        ctx.fillStyle = 'white';
+        ctx.fillRect(player.x + 5, player.y + 5, 8, 8);
+        ctx.fillRect(player.x + 18, player.y + 5, 8, 8);
+    }
+
+    // 启动
+    init();
+
+    // 监听来自父页面的消息 (如果有)
+    window.addEventListener('message', (e) => {
+        if(e.data.type === 'GAME_DATA') {
+            // 这里可以根据 e.data.data.scene 加载不同的 map 数组
+            console.log("Loaded level: " + e.data.data.scene);
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1764672739230.4102,
+    "chapter": "1.1",
+    "text": "ceshi",
+    "files": [],
+    "answer": "42",
+    "hint": "",
+    "created": "2025/12/2 18:52:19"
+  },
+  {
+    "id": 1764672139194.3777,
+    "chapter": "1.1",
+    "text": "测试题目 冯帅xxx",
+    "files": [
+      "/past_papers/chapter_1_1/answer_1764672139191.png"
+    ],
+    "answer": "测试答案",
+    "hint": "测试提示词",
+    "created": "2025/12/2 18:42:19"
+  }
+]

@@ -1,0 +1,411 @@
+[
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "pixel\n256//2^8\nscreen resolution",
+    "timestamp": 1758586424425
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "王尹希",
+    "studentClass": "PREA",
+    "answer": "pixel     256//2的八次方      screen resolution",
+    "timestamp": 1758506444382
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "顾得馨",
+    "studentClass": "PREA",
+    "answer": "pixel\n256\nscreen resolution",
+    "timestamp": 1758506459486
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "周亚",
+    "studentClass": "PREA",
+    "answer": "pixel   256//二的八次方   screen resolusion",
+    "timestamp": 1758506492619
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "胡家信",
+    "studentClass": "PREA",
+    "answer": "1 pixel\n2 2^8\n3 screen resolution",
+    "timestamp": 1758506510190
+  },
+  {
+    "paperId": 1758242169494,
+    "title": "test - binary",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "a:2^40,10^9\nb i:C67 ii:-1641 iii:00110011",
+    "timestamp": 1758690618754
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "陈星妤",
+    "studentClass": "PREA",
+    "answer": "pixel  2^8 Screen resolution",
+    "timestamp": 1758506647988
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "李佳烨",
+    "studentClass": "PREA",
+    "answer": "pixel\n2^8\nscreen solution",
+    "timestamp": 1758506740329
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "王尹希",
+    "studentClass": "PREA",
+    "answer": "A wider range of characters can be represented so characters from more languages can be represented any symbols such as emojis can be used     10094     8512",
+    "timestamp": 1758507540747
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "张浩睿",
+    "studentClass": "PREA",
+    "answer": "pixel  256//28   screen resolution",
+    "timestamp": 1758506863379
+  },
+  {
+    "paperId": 1758242280414,
+    "title": "test- overflow",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "The answer cannot be represented in the number of bits available",
+    "timestamp": 1758588276337
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "顾得馨",
+    "studentClass": "PREA",
+    "answer": "A wider range of characters can be represented.\nSo charaters from more languages can be represented.",
+    "timestamp": 1758506899344
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "陆亭伊",
+    "studentClass": "PREA",
+    "answer": "Pixel\n256\nDisplay Resolution",
+    "timestamp": 1758507033542
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "黄子涵",
+    "studentClass": "PREA",
+    "answer": "1 Pixel \n2 256\n3 Display Resolution",
+    "timestamp": 1758507057355
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "廖芷玲",
+    "studentClass": "PREA",
+    "answer": "pixel\n256",
+    "timestamp": 1758507178904
+  },
+  {
+    "paperId": 1758507160053,
+    "title": "test pixel",
+    "studentName": "廖芷玲",
+    "studentClass": "PREA",
+    "answer": "0.5",
+    "timestamp": 1758507214853
+  },
+  {
+    "paperId": 1758242169494,
+    "title": "test - binary",
+    "studentName": "王尹希",
+    "studentClass": "PREA",
+    "answer": "C67              573       00110011",
+    "timestamp": 1758507580440
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "陈星妤",
+    "studentClass": "PREA",
+    "answer": "A wider range of characters can be represented  so characters from more languages can be represented \n\nand symbols such as emojis can be use  10094  8512",
+    "timestamp": 1758507728580
+  },
+  {
+    "paperId": 1758242169494,
+    "title": "test - binary",
+    "studentName": "陈星妤",
+    "studentClass": "PREA",
+    "answer": "A tebibyte=1024 gibiytes Tebi is binary prefix giga is denary prefix\nC67 -1641  573  00110011",
+    "timestamp": 1758508050188
+  },
+  {
+    "paperId": 1758242280414,
+    "title": "test- overflow",
+    "studentName": "陈星妤",
+    "studentClass": "PREA",
+    "answer": "The answer cannot be represented in the number of bits available",
+    "timestamp": 1758508161333
+  },
+  {
+    "paperId": 1758507160053,
+    "title": "test pixel",
+    "studentName": "陈星妤",
+    "studentClass": "PREA",
+    "answer": "0.5",
+    "timestamp": 1758508193362
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "黄子涵",
+    "studentClass": "PREA",
+    "answer": "(b)\n()\n1 Supports more characters and global languages\n2 Avoids character encoding conflicts\n\n(ii) Binary 00101100 = (0×2⁷) + (0×2⁶) + (1×2⁵) + (1×2⁴) + (1×2³) + (0×2²) + (0×2¹) + (0×2⁰) = 0 + 0 + 32 + 16 + 8 + 0 + 0 + 0 = 60\n\n(iii)Hexadecimal digits correspond to denary values: 2=2, 1=1, 4=4, 0=0.Denary value = (2×16³) + (1×16²) + (4×16¹) + (0×16⁰)= (2×4096) + (1×256) + (4×16) + 0= 8192 + 256 + 64 + 0 = 8512",
+    "timestamp": 1758508205253
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "胡家信",
+    "studentClass": "PREA",
+    "answer": "(i) 1 Unicode can contain more chars,which allows more languages to load on the intrenet\n    2 \n(ii)0010011101101110=2^1+2^2+2^3+2^5+2^6+2^8+2^9+2^10+2^13\n    =10094\n(iii)2140=4*16^1+1*16^2+2*16^3=8512",
+    "timestamp": 1758686601632
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "刘浩天",
+    "studentClass": "AS",
+    "answer": "pixel;256;screen resolution",
+    "timestamp": 1758586143614
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "zl",
+    "studentClass": "AS",
+    "answer": "pixel 256 screen resolution",
+    "timestamp": 1758586120675
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "1.pixel\n2.256\n3.screen resolution",
+    "timestamp": 1760018439693
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "i.)\n\nmore language / symbols can be writen in the computer \nallow user use emoji\n\nii.)10094\n\niii.)8512",
+    "timestamp": 1758587191729
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "1.pixel\n2.2^8\n3.image resolution",
+    "timestamp": 1758586445470
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "鲁顺尧",
+    "studentClass": "AS",
+    "answer": "pixel\n256\nscrean resolution",
+    "timestamp": 1758586532751
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "zl",
+    "studentClass": "AS",
+    "answer": "A wider characters can be represent can use symble like emoji 10094 8512",
+    "timestamp": 1758586652699
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "pixel\n2^8\nscreen resolution",
+    "timestamp": 1758586614897
+  },
+  {
+    "paperId": 1758242169494,
+    "title": "test - binary",
+    "studentName": "zl",
+    "studentClass": "AS",
+    "answer": "gb smaller than tb C67 -1641 573 0011 0011",
+    "timestamp": 1758587230194
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "刘浩天",
+    "studentClass": "AS",
+    "answer": "（i）1.Supports multiple language characters, meeting the requirements of multilingual text processing.\n2.Can represent a large number of characters with strong scalability.\n(ii) 10094\n(iii) 8512",
+    "timestamp": 1758587243243
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "i: A wider range of characters can be represented,so characters from more languages can be represented, and symbols such as emojis can be used.\nii: 10094\niii: 8512",
+    "timestamp": 1758587279968
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "饶华旭",
+    "studentClass": "AS",
+    "answer": "bit\n3",
+    "timestamp": 1758587341984
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "i.1.can show the many different language\n2.symbol\nii.10094\n\niii.8512",
+    "timestamp": 1758690359520
+  },
+  {
+    "paperId": 1758242280414,
+    "title": "test- overflow",
+    "studentName": "zl",
+    "studentClass": "AS",
+    "answer": "anser can not be represent",
+    "timestamp": 1758587725317
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "王逸杰",
+    "studentClass": "AS",
+    "answer": "pixel；256//32；screen resolution",
+    "timestamp": 1758587778298
+  },
+  {
+    "paperId": 1758507160053,
+    "title": "test pixel",
+    "studentName": "zl",
+    "studentClass": "AS",
+    "answer": "1024*512/1024/1024=0.5",
+    "timestamp": 1758587904981
+  },
+  {
+    "paperId": 1758242169494,
+    "title": "test - binary",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "a.one is binay prefix,one is denary prefix\nb.i.c67\nii.-1641\niii.573\nc.00110011",
+    "timestamp": 1758690543127
+  },
+  {
+    "paperId": 1758242169494,
+    "title": "test - binary",
+    "studentName": "刘浩天",
+    "studentClass": "AS",
+    "answer": "（A） terabyte equals 1024 gigabytes, and 1 gigabyte equals 1024 megabytes.\n（b）\n（i）633\n（ii）-633\n（iii）573\n（c）00110111",
+    "timestamp": 1758588156110
+  },
+  {
+    "paperId": 1758242280414,
+    "title": "test- overflow",
+    "studentName": "刘浩天",
+    "studentClass": "AS",
+    "answer": "Because the result of the operation exceeds the range that can be represented by the fixed number of bits used to store binary numbers.",
+    "timestamp": 1758588415206
+  },
+  {
+    "paperId": 1758241443260,
+    "title": "test-Unicode",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "i a wider rang of characters can be represented \nand symbols such as emojis can be used\nii 11094\niii 8496",
+    "timestamp": 1758589583095
+  },
+  {
+    "paperId": 1758507160053,
+    "title": "test pixel",
+    "studentName": "刘浩天",
+    "studentClass": "AS",
+    "answer": "1024×512 = 524288\n524288/1024/1024=0.5",
+    "timestamp": 1758589659600
+  },
+  {
+    "paperId": 1758242280414,
+    "title": "test- overflow",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "when the value in binary have the more bits than the 8,like 9",
+    "timestamp": 1758590434415
+  },
+  {
+    "paperId": 1758507160053,
+    "title": "test pixel",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "512*1024/1024/1024=0.5",
+    "timestamp": 1758590605180
+  },
+  {
+    "paperId": 1758507160053,
+    "title": "test pixel",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "1024/(2^20)=0.5",
+    "timestamp": 1758690763417
+  },
+  {
+    "paperId": 1758242169494,
+    "title": "test - binary",
+    "studentName": "胡家信",
+    "studentClass": "PREA",
+    "answer": "tebibyte is a binary prefix,gigabyte is a denary prefix\n1tebybyte=2^40 whereas\n1gigabyte=10^9",
+    "timestamp": 1758691769674
+  },
+  {
+    "paperId": 1758242280414,
+    "title": "test- overflow",
+    "studentName": "胡家信",
+    "studentClass": "PREA",
+    "answer": "the binary in result is too big or small for the available bits to show it",
+    "timestamp": 1758691946762
+  },
+  {
+    "paperId": 1758241242927,
+    "title": "test-1 bitmap",
+    "studentName": "冯帅",
+    "studentClass": "PREA",
+    "answer": "I don't kown",
+    "timestamp": 1759544018675,
+    "score": 0
+  },
+  {
+    "paperId": 1758507160053,
+    "title": "test pixel",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "000",
+    "timestamp": 1760018463069
+  }
+]

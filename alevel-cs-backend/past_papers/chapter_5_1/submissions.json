@@ -1,0 +1,34 @@
+[
+  {
+    "paperId": 1758522954869,
+    "title": "opreating systems-Memory and process management",
+    "studentName": "Rebecca",
+    "studentClass": "AS",
+    "answer": "Memory management: decided which process should be put in the main memory, and make the biggest efficiency of the memory \nProcess management: decided which process should be run next, and switched between the process, allow them to share the use of processor",
+    "timestamp": 1758696191644
+  },
+  {
+    "paperId": 1758015063248,
+    "title": "Operating Systems 1",
+    "studentName": "Rebecca",
+    "studentClass": "AS",
+    "answer": "Manage memory and file, handle the process and provide a user interface.",
+    "timestamp": 1759046304021
+  },
+  {
+    "paperId": 1758016989401,
+    "title": "Operating System  file management",
+    "studentName": "Rebecca",
+    "studentClass": "AS",
+    "answer": "The file can be created, copyright, destroyed, renamed etc. The user can control the access of different people, decide whether let them to read or write. It can also can control the file storage, like txt, pdf etc.",
+    "timestamp": 1759046600135
+  },
+  {
+    "paperId": 1758523586025,
+    "title": "Operating System 2",
+    "studentName": "Rebecca",
+    "studentClass": "AS",
+    "answer": "a)Manage the memory and file.\nb) To do the file compression, which reduces the sizes of the file and saving the memory space, also can speed up the data transmission.",
+    "timestamp": 1759046971643
+  }
+]

@@ -1,0 +1,294 @@
+[
+  {
+    "paperId": 1754311467948,
+    "title": "SRAM & DRAM",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "1.DRAM requires constant refresh cycles unlike SRAM\n2.DRAM has lower access speed than SRAM",
+    "timestamp": 1759193109086
+  },
+  {
+    "paperId": 1754311467948,
+    "title": "SRAM & DRAM",
+    "studentName": "鲁顺尧",
+    "studentClass": "AS",
+    "answer": "DRAM has slower speed access unlike SRAM\nDRAM requires constant refresh cycles unlike SRAM",
+    "timestamp": 1759193015658
+  },
+  {
+    "paperId": 1754311467948,
+    "title": "SRAM & DRAM",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "DRam requires constant refresh crycle \nDRam have a lower access speed than SRam",
+    "timestamp": 1760107774859
+  },
+  {
+    "paperId": 1754311684456,
+    "title": "SRAM & DRAM2",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "1.DRam has lower cost than SRam\n2.DRam can stored more data than SRam",
+    "timestamp": 1759194337634
+  },
+  {
+    "paperId": 1754311467948,
+    "title": "SRAM & DRAM",
+    "studentName": "饶",
+    "studentClass": "AS",
+    "answer": "1dram's speed is more slow than sarm\n2dram requires constant refresh cycles unlike sarm",
+    "timestamp": 1759194379169
+  },
+  {
+    "paperId": 1754311684456,
+    "title": "SRAM & DRAM2",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "1.dynamic RAM has lower cost per unit\n2.A fast access speed is not needed",
+    "timestamp": 1759194616259
+  },
+  {
+    "paperId": 1754311684456,
+    "title": "SRAM & DRAM2",
+    "studentName": "饶",
+    "studentClass": "AS",
+    "answer": "1the cost of dram is more cheap\n2not need the high speed\n3dram stone more datas",
+    "timestamp": 1759195107586
+  },
+  {
+    "paperId": 1754311684456,
+    "title": "SRAM & DRAM2",
+    "studentName": "鲁顺尧",
+    "studentClass": "AS",
+    "answer": "DRAM have lower cost per unit\nthis equipment do not need a high speed\nDRAM have high density",
+    "timestamp": 1759195479624
+  },
+  {
+    "paperId": 1754789909653,
+    "title": "eprom &eeprom",
+    "studentName": "饶",
+    "studentClass": "AS",
+    "answer": "1eprom use ultraviolet light to erase data but eeprom use electrical to do it\n2eprom need move away from the main board but eeprom not\n3eprom need erase all datas but eeprom just need a part of datas",
+    "timestamp": 1759196153672
+  },
+  {
+    "paperId": 1754789909653,
+    "title": "eprom &eeprom",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "1.EPRam uses extraviolet light to erase data, EEPRam uses electrical signal to erase data.\n2.EPRam erasea all the data , EEPRam allows change a part of data.",
+    "timestamp": 1759196084219
+  },
+  {
+    "paperId": 1755043403407,
+    "title": "optical disc ",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "i: The disc is spun at high speed\nA laser is shone onto the disc to read/write\nUsing optical head to move it into position\nIt follows the spiral track from the centre outwards\nii: The computer and optical disc reader/writer send and receive at different speeds\nA buffer aloows temporary storage of the data\nso that the computer can transfer data to the buffer at the higher speed\nand is not held up waiting for data to the buffer at the higher speed.",
+    "timestamp": 1760338007779
+  },
+  {
+    "paperId": 1760338206037,
+    "title": "3d printer 2",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "Additive manufacturing\nUses a digital 3D modle or a computer Aided design(CAD)(file)\nBuilds up the model one layer at a time\nStarting from the bottom\nUsing x,y and z co-ordinates\nThe material is fused/cured together layer by layer\nMaterial is heated and pushed through nozzle/extruder\nPhotosensitive liquid resin is exposed to a UV-laser beam\nUses liquid plastic resin melted with arc lamps\nUses a laser to form objects from powdered material",
+    "timestamp": 1760402525557,
+    "score": 95,
+    "aiFeedback": "你的答案准确涵盖了所有关键评分点，包括增材制造的基本原理和四种主要3D打印技术的描述。拼写错误（如“modle”）轻微影响清晰度，但不影响整体理解。",
+    "fullMarkAnswer": "中文分析：完整答案应准确描述增材制造的核心特征（使用数字3D模型或CAD文件、逐层从底部构建、使用XYZ坐标、材料逐层融合/固化），并正确说明FDM（加热材料通过喷嘴挤出）、SLA（光敏树脂受UV激光照射）、DLP（使用弧光灯固化液态树脂）和SLS（激光烧结粉末材料）四种技术。语言需清晰无拼写错误。\n\nEnglish Full Mark Answer: A complete answer should accurately describe the core characteristics of additive manufacturing (using a digital 3D model or CAD file, building layer by layer from the bottom, using x, y, and z coordinates, and fusing/curing material layer by layer) and correctly explain the four main 3D printing technologies: Fused Deposition Modelling (FDM) – material is heated and extruded through a nozzle; Stereolithography (SLA) – photosensitive liquid resin is cured by a UV laser; Digital Light Processing (DLP) – liquid resin is cured using arc lamps; and Selective Laser Sintering (SLS) – a laser sinters powdered material to form objects. The response must be clear and free of spelling or grammatical errors."
+  },
+  {
+    "paperId": 1760338206037,
+    "title": "3d printer 2",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "1.Starts with a digital 3D model or CAD file\n2.Builds object layer by layer from the bottomUses x, y, z coordinates to shape each layer\n3.Layers are fused or cured together",
+    "timestamp": 1760339277375,
+    "score": 60,
+    "aiFeedback": "你的答案涵盖了3D打印的基本流程，包括使用数字模型、逐层构建和坐标系统，但缺少对具体技术类型（如FDM、SLA、DLP、SLS）的描述，未能满足评分标准中对准确性和逻辑完整性的更高要求。",
+    "fullMarkAnswer": "中文分析：完整答案应包括：1. 增材制造的基本定义；2. 使用数字3D模型或CAD文件；3. 从底部开始逐层构建，使用x、y、z坐标；4. 材料逐层融合或固化；5. 至少描述两种具体3D打印技术（如FDM：材料通过喷嘴加热挤出；SLA：光敏树脂被UV激光固化；DLP：使用弧光灯固化液态树脂；SLS：激光烧结粉末材料）。\n\nEnglish Full Mark Answer: A complete answer should include: 1. Definition of additive manufacturing; 2. Use of a digital 3D model or CAD file; 3. Building the object layer by layer from the bottom using x, y, and z coordinates; 4. Fusing or curing materials layer by layer; 5. Description of at least two specific 3D printing technologies (e.g., FDM: material is heated and extruded through a nozzle; SLA: photosensitive resin is cured by a UV laser; DLP: liquid resin is cured using arc lamps; SLS: a laser sinters powdered material to form the object)."
+  },
+  {
+    "paperId": 1760338206037,
+    "title": "3d printer 2",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "1.Creates solid objects from digital designs\n2.through the nozzle to push the material\n3.use the UV-light to liquid become a shape\n4.uses liquid plastic resin melted with arc lamps",
+    "timestamp": 1760339360591
+  },
+  {
+    "paperId": 1760338206037,
+    "title": "3d printer 2",
+    "studentName": "鲁顺尧",
+    "studentClass": "AS",
+    "answer": "addivite manufacturing\nbuilds up model one layer at a time",
+    "timestamp": 1760339381047,
+    "score": 30,
+    "aiFeedback": "你的答案仅提到了增材制造和逐层构建模型，覆盖了部分基础要点，但缺少对具体3D打印技术（如FDM、SLA、DLP、SLS）的描述，也未提及数字模型、坐标系统或材料融合方式，逻辑不完整且内容不充分。",
+    "fullMarkAnswer": "中文分析：完整的答案应包括：1. 明确定义增材制造；2. 指出使用数字3D模型或CAD文件；3. 描述从底部开始，依据x、y、z坐标逐层构建；4. 说明材料如何逐层融合或固化；5. 至少详细说明两种具体3D打印技术（如FDM使用加热喷嘴挤出材料，SLA用紫外激光固化光敏树脂，DLP用弧光灯固化树脂，SLS用激光烧结粉末材料）。\n\nEnglish Full Mark Answer: A complete answer should include: 1. A clear definition of additive manufacturing; 2. Mention of using a digital 3D model or CAD file; 3. Description of building the object layer by layer from the bottom using x, y, and z coordinates; 4. Explanation of how materials are fused or cured together layer by layer; 5. Detailed descriptions of at least two specific 3D printing technologies (e.g., FDM extrudes heated material through a nozzle, SLA uses a UV laser to cure photosensitive resin, DLP uses arc lamps to cure liquid resin, and SLS uses a laser to sinter powdered material)."
+  },
+  {
+    "paperId": 1760338206037,
+    "title": "3d printer 2",
+    "studentName": "饶华旭",
+    "studentClass": "AS",
+    "answer": "Starts with a digital 3D model or CAD file\nBuilds object layer by layer from the bottom\nUses x, y, z coordinates to shape each \nlayerLayers are fused or cured together",
+    "timestamp": 1760339425272,
+    "score": 60,
+    "aiFeedback": "你的答案涵盖了3D打印的基本流程，如使用数字模型、逐层构建和坐标系统，但缺少对具体技术类型（如FDM、SLA、DLP、SLS）的描述，未能满足完整逻辑和内容深度的要求。",
+    "fullMarkAnswer": "中文分析：完整的答案应包括：1. 对增材制造（additive manufacturing）的基本定义；2. 使用数字3D模型或CAD文件作为起点；3. 从底部开始逐层构建，使用x、y、z坐标；4. 层与层之间通过熔融或固化结合；5. 至少详细说明两种以上主流3D打印技术（如FDM、SLA、DLP或SLS）的工作原理。\n\nEnglish Full Mark Answer: A complete answer should include: 1. Definition of additive manufacturing; 2. Starting from a digital 3D model or CAD file; 3. Building the object layer by layer from the bottom using x, y, and z coordinates; 4. Fusing or curing layers together; 5. Detailed descriptions of at least two major 3D printing technologies (e.g., FDM: material heated and extruded through a nozzle; SLA: UV laser curing photosensitive resin; DLP: arc lamps curing liquid resin; SLS: laser sintering powdered material)."
+  },
+  {
+    "paperId": 1760338293748,
+    "title": "3d printer 3",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "1.prevent overheating in 3D printer\n2.identifying the temperature of the object\n3.identifying the temperature of the material being used",
+    "timestamp": 1760401797628,
+    "score": 95,
+    "aiFeedback": "你的答案准确涵盖了评分标准中的所有关键点，逻辑清晰且与问题高度相关。唯一可改进之处是稍作扩展以增强完整性，例如简要说明温度监控如何防止过热或确保材料适宜。",
+    "fullMarkAnswer": "中文分析：完整答案应明确指出温度传感器的作用：1. 防止3D打印机过热；2. 通过监测打印物体的温度；3. 通过监测所用材料的温度。此外，可简要说明这些措施如何保障打印质量和设备安全。\n\nEnglish Full Mark Answer: A complete answer should clearly state the role of temperature sensors: 1. To prevent overheating of the 3D printer; 2. By monitoring the temperature of the object being printed; 3. By monitoring the temperature of the printing material. Additionally, a brief explanation of how these measures ensure print quality and device safety would enhance completeness."
+  },
+  {
+    "paperId": 1760338293748,
+    "title": "3d printer 3",
+    "studentName": "饶华旭",
+    "studentClass": "AS",
+    "answer": "1.To prevent overheating or ensure material is hot enough\n2.By identifying the temperature of the object\n3.By identifying the temperature of the material being used",
+    "timestamp": 1760402733719,
+    "score": 100
+  },
+  {
+    "paperId": 1755039881390,
+    "title": "microphone.",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "1.the microphone has a diaphragm\n2. convert sound waves into electric signals.",
+    "timestamp": 1760405136819
+  },
+  {
+    "paperId": 1760338293748,
+    "title": "3d printer 3",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "To prevent overheating//ensure material is hot enough\nby identifying the temperature of the object (being printed)\nby identifying the temperature of the material being used",
+    "timestamp": 1760402258776,
+    "score": 100,
+    "aiFeedback": "你的答案完全符合评分标准，准确、逻辑完整且清晰地涵盖了所有关键点。",
+    "fullMarkAnswer": "中文分析：完整的答案应准确指出3D打印机中温度监控的目的（防止过热或确保材料足够热），并明确说明通过监测打印物体和所用材料的温度来实现。学生答案完全匹配标准答案，无遗漏。\n\nEnglish Full Mark Answer: A complete answer should accurately state the purpose of temperature monitoring in a 3D printer (to prevent overheating or ensure the material is hot enough) and clearly specify that this is achieved by identifying the temperature of both the object being printed and the material being used. The student’s response matches the mark scheme exactly with no omissions."
+  },
+  {
+    "paperId": 1760338293748,
+    "title": "3d printer 3",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "To prevent overheating//ensure material is hot enough\nby identifying the temperature of the object(being printed)\nby identifying the temperature of the material being used",
+    "timestamp": 1760402429742,
+    "score": 95
+  },
+  {
+    "paperId": 1760338293748,
+    "title": "3d printer 3",
+    "studentName": "鲁顺尧",
+    "studentClass": "AS",
+    "answer": "to prevent overheating\nidentifying the temperature of the object\nidentifying the temperature of the material being used",
+    "timestamp": 1760402511498,
+    "score": 100,
+    "aiFeedback": "你的答案完全符合评分标准，准确指出了防止过热的目的，并清晰列出了两个关键温度监测点，逻辑完整且表述清晰。",
+    "fullMarkAnswer": "中文分析：完整的答案应包括：1. 明确指出温度传感器的作用是防止过热或确保材料足够热；2. 说明需监测打印物体的温度；3. 说明需监测所用材料的温度。学生答案准确覆盖全部要点。\n\nEnglish Full Mark Answer: A complete answer should include: 1. Clearly stating that the purpose of temperature sensors is to prevent overheating or ensure the material is hot enough; 2. Identifying the need to monitor the temperature of the object being printed; 3. Identifying the need to monitor the temperature of the material being used. The student's response accurately covers all required points."
+  },
+  {
+    "paperId": 1760401927721,
+    "title": "laser printer",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "The print instructions and data are sent by the laptop to a buffer(at laptop speed)\nThe data is transferred from the buffer to the printer(at printer speed)\nallowing user to continue using the laptop//and allowing processor to continue processing \ninstead of waiting for relatively slower printer\nWhen the buffer is empty an interrupt is sent to the laptop\nrequesting more data",
+    "timestamp": 1760404074303,
+    "score": 95
+  },
+  {
+    "paperId": 1760401927721,
+    "title": "laser printer",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "A laser printer relies on a buffer—a temporary, high-speed data storage component—to resolve the mismatch between the slow rate at which a computer sends print jobs and the rapid, continuous operation of the printer’s internal mechanisms. This buffer acts as a \"middleman,\" ensuring smooth, efficient, and error-free printing. Below is a detailed breakdown of how the buffer functions at each stage of the laser printing process, along with its key roles and benefits.",
+    "timestamp": 1760404458577,
+    "score": 60,
+    "aiFeedback": "你的答案提到了缓冲区的作用，但未准确描述数据流向（从电脑到缓冲区再到打印机）、中断机制以及CPU如何继续处理任务等关键点，逻辑完整性不足，且部分表述不准确（如“电脑发送打印作业速度慢”与事实相反）。",
+    "fullMarkAnswer": "中文分析：完整答案应包括：1. 打印指令和数据由电脑以电脑速度发送至缓冲区；2. 数据从缓冲区以打印机速度传送到打印机；3. 这使得用户可继续使用电脑，处理器无需等待较慢的打印机；4. 当缓冲区为空时，打印机向电脑发送中断请求更多数据。\n\nEnglish Full Mark Answer: A complete answer should include: 1. Print instructions and data are sent from the computer to a buffer at the computer's speed. 2. Data is then transferred from the buffer to the printer at the printer's speed. 3. This allows the user to continue using the computer and the processor to carry on with other tasks instead of waiting for the relatively slower printer. 4. When the buffer is empty, an interrupt is sent to the computer requesting more data."
+  },
+  {
+    "paperId": 1760401927721,
+    "title": "laser printer",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "The buffer in a laser printer is a temporary data storage \"transfer station\" whose core function is to resolve the speed mismatch between the computer’s data transmission rate and the printer’s physical printing speed, ensuring smooth printing. First, it balances the speed difference: it receives all data sent quickly by the computer first, then transmits it step by step at a speed the printer can handle, preventing the computer from waiting unnecessarily or the printer from \"running out of data\" mid-print. Second, it guarantees printing stability: the buffer can temporarily store data, reducing issues like garbled text or missing pages caused by interrupted data transmission. It also queues multiple print tasks in order to avoid confusion between different jobs. However, the buffer is limited by its capacity—this capacity determines the amount of data it can process at once. When the capacity is insufficient, printing large files (such as high-definition images) may slow down, as the printer has to receive data in batches from the computer.",
+    "timestamp": 1760404491276
+  },
+  {
+    "paperId": 1760401927721,
+    "title": "laser printer",
+    "studentName": "饶华旭",
+    "studentClass": "AS",
+    "answer": "1.the data send to printer from laptop at first\n2.The printer store the data to buffer\n3.The data send to printer from buffer in speed of printer\n4.Allowing user to continue use the laptop\n5.When the buffer is empty an interrupt sent to the laptop",
+    "timestamp": 1760405262118,
+    "score": 70,
+    "aiFeedback": "你的答案涵盖了缓冲区、数据传输速度差异和中断机制等关键点，但表述不够准确且逻辑顺序有误。例如，缓冲区位于打印机端而非由打印机‘存储’数据，且未明确说明数据先由笔记本以高速发送至缓冲区。此外，缺少对处理器继续处理任务的说明，影响了完整性。",
+    "fullMarkAnswer": "中文分析：完整答案应包括：1. 笔记本以自身速度将打印指令和数据发送到打印机的缓冲区；2. 打印机以自身较慢的速度从缓冲区读取数据进行打印；3. 此机制允许用户继续使用笔记本，且CPU无需等待打印机完成；4. 当缓冲区为空时，打印机向笔记本发送中断请求更多数据。\n\nEnglish Full Mark Answer: A complete answer should include: 1. The laptop sends print instructions and data to a buffer in the printer at the laptop's speed. 2. The printer retrieves data from the buffer at its own (slower) printing speed. 3. This allows the user to continue using the laptop and the processor to carry on with other tasks without waiting for the slower printer. 4. When the buffer becomes empty, the printer sends an interrupt signal to the laptop to request more data."
+  },
+  {
+    "paperId": 1760338206037,
+    "title": "3d printer 2",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "3D printing (additive manufacturing) creates three-dimensional objects by building them layer by layer from a digital model, rather than removing material (as in subtractive manufacturing like carving or milling). While specific processes (e.g., FDM, SLA, SLS) vary, all 3D printers follow a core sequence of principal operations to transform digital data into physical objects. Below is a detailed breakdown of these key steps, organized in the order they typically occur.",
+    "timestamp": 1760404666923,
+    "score": 40,
+    "aiFeedback": "你的答案仅描述了3D打印的通用流程，未具体说明任何一种技术（如FDM、SLA、SLS或DLP）的工作原理，也未提及关键评分点如逐层构建、坐标系统、材料融合方式等，内容过于笼统，缺乏准确性和细节。",
+    "fullMarkAnswer": "中文分析：完整的答案应包括：1. 明确指出3D打印即增材制造；2. 说明使用数字3D模型或CAD文件；3. 描述从底部开始逐层构建，使用x、y、z坐标；4. 解释材料如何逐层融合或固化；5. 至少详细说明两种具体技术（如FDM：材料加热后通过喷嘴挤出；SLA：光敏树脂被紫外激光固化；DLP：使用弧光灯固化液态树脂；SLS：激光烧结粉末材料）。\n\nEnglish Full Mark Answer: A complete answer should include: 1. Identification of 3D printing as additive manufacturing; 2. Use of a digital 3D model or CAD file; 3. Layer-by-layer construction starting from the bottom using x, y, and z coordinates; 4. Explanation of how material is fused or cured layer by layer; 5. Detailed descriptions of at least two specific technologies (e.g., FDM: material is heated and extruded through a nozzle; SLA: photosensitive resin is cured by a UV laser; DLP: liquid resin is solidified using arc lamps; SLS: a laser sinters powdered material to form objects)."
+  },
+  {
+    "paperId": 1760401927721,
+    "title": "laser printer",
+    "studentName": "韩雨轩",
+    "studentClass": "AS",
+    "answer": "1.The print instructions and data are sent by the laptop to a buffer\n2.The data is transferred from the buffer to the printer \n3.The buffer allowing users continue their work when they upload data to printer.",
+    "timestamp": 1760404706688,
+    "score": 65,
+    "aiFeedback": "你的答案涵盖了缓冲区的基本作用，但遗漏了关键细节，如数据传输速度差异、中断机制以及处理器继续处理的优势。逻辑不够完整，且表述不够清晰。",
+    "fullMarkAnswer": "中文分析：完整的答案应包括：1. 笔记本以自身速度将打印指令和数据发送到缓冲区。2. 数据以打印机速度从缓冲区传送到打印机。3. 这使得用户可以继续使用笔记本，处理器也能继续处理其他任务，而无需等待较慢的打印机。4. 当缓冲区为空时，打印机会向笔记本发送中断信号，请求更多数据。\n\nEnglish Full Mark Answer: A complete answer should include: 1. The print instructions and data are sent by the laptop to a buffer at the laptop's speed. 2. The data is transferred from the buffer to the printer at the printer's speed. 3. This allows the user to continue using the laptop and the processor to continue processing other tasks instead of waiting for the relatively slower printer. 4. When the buffer is empty, an interrupt is sent to the laptop requesting more data."
+  },
+  {
+    "paperId": 1755039881390,
+    "title": "microphone.",
+    "studentName": "WSNB",
+    "studentClass": "AS",
+    "answer": "1.the microphone has a ribbon.\n2.the sound waves cause vibration of the diagram\n3.producing the signal included eletrical element",
+    "timestamp": 1760405412290
+  },
+  {
+    "paperId": 1755039881390,
+    "title": "microphone.",
+    "studentName": "Missionary",
+    "studentClass": "AS",
+    "answer": "The microphone has a diaphragm/ribbon\nThe incoming sound waves cause vibrations of the diaphragm\ncausing a coil to move past a magnet/causing a magnet to move pase a coil(dynamic microphone)/changing the capacitance(condenser mocrophone)/deforms the crystal(crystal microphone)\nAn electrical signal is produced",
+    "timestamp": 1760405574433
+  },
+  {
+    "paperId": 1755039881390,
+    "title": "microphone.",
+    "studentName": "饶华旭",
+    "studentClass": "AS",
+    "answer": "1.mic have a diaphragm\n2.the sound can make diaphragm vibrate\n3.produce an elecrical signal",
+    "timestamp": 1760405742283
+  },
+  {
+    "paperId": 1755039881390,
+    "title": "microphone.",
+    "studentName": "王予涵",
+    "studentClass": "AS",
+    "answer": "The microphone has a diaphragm/ribbon\nThe incoming sound waves cause vibrations of the diaphragm\ncausing a coil to move past a magnet//causing a magnet to move\npast a coil(dynamic microphone)//chaging the capacitance//deforms the crystal\nAn electrical signal is produced",
+    "timestamp": 1760406050676
+  }
+]

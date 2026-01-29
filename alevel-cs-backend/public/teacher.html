@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>老师出题面板（极简版）</title>
+  <style>
+    body{font-family: system-ui;background:#f4f6f9;padding:30px;}
+    .box{max-width:800px;margin:auto;background:white;padding:30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+    input,select,textarea,button{margin:10px 0;padding:12px;font-size:16px;width:100%;border-radius:8px;border:1px solid #ddd;box-sizing:border-box;}
+    button{background:#0066cc;color:white;border:none;cursor:pointer;font-size:18px;}
+    button:hover{background:#0055aa;}
+    .drag-area{border:3px dashed #0066cc;padding:40px;text-align:center;border-radius:12px;background:#f9f9ff;margin:20px 0;cursor:pointer;transition:0.3s;}
+    .drag-area.dragover{background:#e6f0ff;border-color:#0055aa;}
+    #msg{margin-top:15px;font-weight:bold;padding:15px;border-radius:8px;text-align:center;}
+    .success{background:#d4edda;color:#155724;}
+    .error{background:#f8d7da;color:#721c24;}
+  </style>
+</head>
+<body>
+<div class="box">
+  <h1 style="text-align:center;color:#0066cc;margin-bottom:30px;">A-Level CS 老师出题面板</h1>
+  
+  <input type="password" id="pwd" placeholder="密码：fengshuai1982" value="fengshuai1982">
+
+  <select id="chapter">
+    <option value="">选择章节</option>
+    <option value="1.1">1.1 Information Representation</option>
+    <option value="1.2">1.2 Communication & Internet Technologies</option>
+    <option value="1.3">1.3 Hardware and Virtual Machines</option>
+    <option value="1.4">1.4 Logic Gates and Logic Circuits</option>
+    <option value="2.1">2.1 Algorithms</option>
+    <option value="2.2">2.2 Programming Paradigms</option>
+    <option value="2.3">2.3 Low-Level Programming</option>
+    <option value="3.1">3.1 Data Representation</option>
+    <option value="3.2">3.2 Multimedia</option>
+    <option value="3.3">3.3 Compression</option>
+    <option value="3.4">3.4 Encryption</option>
+    <option value="4.1">4.1 Databases</option>
+    <option value="4.2">4.2 Networking</option>
+    <option value="4.3">4.3 Object-Oriented Programming</option>
+    <!-- 继续补全其他章节 -->
+  </select>
+
+  <textarea id="text" placeholder="题目文字（如果上传了图片/PDF可不填）" rows="4"></textarea>
+
+  <div class="drag-area" id="drop">
+    拖图片或PDF到这里（或点击选择文件）<br>
+    <small>支持多选，最多10个文件</small>
+  </div>
+  <input type="file" id="file" multiple style="display:none" accept="image/*,.pdf">
+
+  <textarea id="answer" placeholder="标准答案（必填！写清楚得分点）" rows="5" required></textarea>
+  <textarea id="hint" placeholder="AI讲解提示词（可选，比如：重点讲浮点数规格化）" rows="2"></textarea>
+
+  <button onclick="upload()">上传这道新题</button>
+  <div id="msg">准备好了，随时可以上传～</div>
+</div>
+
+<script>
+const drop = document.getElementById('drop');
+['dragover','dragenter'].forEach(e => {
+  drop.addEventListener(e, ev => {
+    ev.preventDefault();
+    drop.classList.add('dragover');
+  });
+});
+['dragleave','drop'].forEach(e => {
+  drop.addEventListener(e, ev => {
+    ev.preventDefault();
+    drop.classList.remove('dragover');
+  });
+});
+
+drop.addEventListener('drop', e => {
+  e.preventDefault();
+  const files = e.dataTransfer.files;
+  document.getElementById('file').files = files;
+  drop.innerHTML = `已选择 ${files.length} 个文件<br><small style="color:#0066cc;">${Array.from(files).map(f=>f.name).join(', ')}</small>`;
+});
+
+drop.addEventListener('click', () => document.getElementById('file').click());
+
+document.getElementById('file').addEventListener('change', e => {
+  const files = e.target.files;
+  if(files.length > 0){
+    drop.innerHTML = `已选择 ${files.length} 个文件<br><small style="color:#0066cc;">${Array.from(files).map(f=>f.name).join(', ')}</small>`;
+  }
+});
+
+async function upload(){
+  const pwd = document.getElementById('pwd').value.trim();
+  const chapter = document.getElementById('chapter').value;
+  const text = document.getElementById('text').value.trim();
+  const answer = document.getElementById('answer').value.trim();
+  const hint = document.getElementById('hint').value.trim();
+  const files = document.getElementById('file').files;
+  const msg = document.getElementById('msg');
+
+  if(pwd !== 'fengshuai1982'){
+    msg.className = 'error';
+    msg.textContent = '密码不对哦～';
+    return;
+  }
+  if(!chapter || !answer){
+    msg.className = 'error';
+    msg.textContent = '章节和答案必须填写！';
+    return;
+  }
+
+  const form = new FormData();
+  form.append('password', pwd);        // 关键：传密码！
+  form.append('chapter', chapter);
+  form.append('text', text);
+  form.append('answer', answer);
+  form.append('hint', hint);
+  for(let f of files) form.append('files', f);
+
+  msg.className = '';
+  msg.textContent = '上传中，请稍等...';
+
+  try {
+    const r = await fetch('/upload_practice', {
+      method: 'POST',
+      body: form
+    });
+    const t = await r.text();
+    
+    if(r.ok){
+      msg.className = 'success';
+      msg.textContent = '上传成功！学生端已经实时更新啦～';
+      // 清空表单
+      document.getElementById('chapter').value = '';
+      document.getElementById('text').value = '';
+      document.getElementById('answer').value = '';
+      document.getElementById('hint').value = '';
+      document.getElementById('file').value = '';
+      drop.innerHTML = '拖图片或PDF到这里（或点击选择文件）<br><small>支持多选，最多10个文件</small>';
+    } else {
+      msg.className = 'error';
+      msg.textContent = '上传失败：' + t;
+    }
+  } catch(e) {
+    msg.className = 'error';
+    msg.textContent = '网络错误：' + e.message;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1753862769612,
+    "title": "IPV4 & IPV6",
+    "question": "/past_papers/chapter_2_2/question_1753862769608.png",
+    "answer": "/past_papers/chapter_2_2/answer_1753862769610.png",
+    "solution": "Length of the Address:\r\nIPv4 addresses are 32 bits long, typically written as four octets (e.g., 192.168.0.1).\r\nIPv6 addresses are 128 bits long, written as eight groups of four hexadecimal digits (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334).\r\nAddress Space:\r\nIPv4 provides a limited number of addresses (around 4.3 billion), which has led to address shortages.\r\nIPv6 offers an extremely large address space (around 340 undecillion addresses), which allows for an almost unlimited number of unique IP addresses.\r\nThese differences are among the key reasons IPv6 was developed to overcome the limitations of IPv4."
+  },
+  {
+    "id": 1753876366621,
+    "title": "ipv4,ipv6 ---2",
+    "question": "/past_papers/chapter_2_2/question_1753876366620.png",
+    "answer": "/past_papers/chapter_2_2/answer_1753876366619.png",
+    "solution": "omitt"
+  },
+  {
+    "id": 1753876745190,
+    "title": "ip address",
+    "question": "/past_papers/chapter_2_2/question_1753876745187.png",
+    "answer": "/past_papers/chapter_2_2/answer_1753876745187.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1753982237209,
+    "title": "subnet",
+    "question": "/past_papers/chapter_2_2/question_1753982237206.png",
+    "answer": "/past_papers/chapter_2_2/answer_1753982237205.png",
+    "solution": "Faster Network: Splits traffic, so the network runs smoother with less congestion.\r\nBetter Security: Keeps sensitive areas separate, like guest Wi-Fi from company devices.\r\nEasier Management: Smaller groups of devices are simpler to monitor and fix.\r\nSaves IP Addresses: Uses only the IP addresses needed for each group.\r\nRoom to Grow: Adding new devices or departments is easier with subnets.\r\nOrganized Setup: Groups devices by purpose or location, making things tidy."
+  },
+  {
+    "id": 1754011981618,
+    "title": "Type of IP address",
+    "question": "/past_papers/chapter_2_2/question_1754011981613.png",
+    "answer": "/past_papers/chapter_2_2/answer_1754011981615.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1754020321767,
+    "title": "router & URL",
+    "question": "/past_papers/chapter_2_2/question_1754020321451.png",
+    "answer": "/past_papers/chapter_2_2/answer_1754020321450.png",
+    "solution": "Receives packets from devices\r\n\r\nPerformed by the router\r\n\r\nThe router receives data packets from connected devices (e.g., computers, phones). This is a core function of a router, acting as an intermediary to handle incoming packets and decide their next destination.\r\nFinds the IP address of a Uniform Resource Locator (URL)\r\n\r\nNot performed by the router\r\n\r\nResolving a URL to an IP address is done by a DNS server, not the router. The router’s role is to forward packets based on known IP addresses, while DNS servers translate domain names (e.g., www.example.com) into IP addresses (e.g., 192.0.2.1).\r\nDirects each packet to all devices attached to it\r\n\r\nNot performed by the router\r\n\r\nA router does not broadcast packets to all connected devices. Instead, it selectively forwards packets to the correct device or network based on the destination IP address. Broadcasting to all devices is typical of a hub, not a router.\r\nStores the IP and/or MAC address of all devices attached to it\r\n\r\nPerformed by the router\r\n\r\nRouters maintain an ARP table (Address Resolution Protocol table) that maps the IP addresses and MAC addresses of connected devices. This table helps the router accurately forward packets within the local network."
+  },
+  {
+    "id": 1754020493891,
+    "title": " peer-to-peer network ",
+    "question": "/past_papers/chapter_2_2/question_1754020493890.png",
+    "answer": "/past_papers/chapter_2_2/answer_1754020493889.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1758109435070,
+    "title": "ipv4& ip address",
+    "question": "/past_papers/chapter_2_2/question_1758109432190.png",
+    "answer": "/past_papers/chapter_2_2/answer_1758109433342.png",
+    "solution": "omit"
+  }
+]

@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1754311467948,
+    "title": "SRAM & DRAM",
+    "question": "/past_papers/chapter_3/question_1754311467939.png",
+    "answer": "/past_papers/chapter_3/answer_1754311467941.png",
+    "solution": "OMIT"
+  },
+  {
+    "id": 1754311684456,
+    "title": "SRAM & DRAM2",
+    "question": "/past_papers/chapter_3/question_1754311684453.png",
+    "answer": "/past_papers/chapter_3/answer_1754311684454.png",
+    "solution": "OMIT"
+  },
+  {
+    "id": 1754789909653,
+    "title": "eprom &eeprom",
+    "question": "/past_papers/chapter_3/question_1754789909233.png",
+    "answer": "/past_papers/chapter_3/answer_1754789909234.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1754791259291,
+    "title": "eeprom SRAM",
+    "question": "/past_papers/chapter_3/question_1754791258942.png",
+    "answer": "/past_papers/chapter_3/answer_1754791258942.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1754908051084,
+    "title": "Embedded systems ",
+    "question": "/past_papers/chapter_3/question_1754908051047.png",
+    "answer": "/past_papers/chapter_3/answer_1754908051049.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1754908207302,
+    "title": " embedded system RAM",
+    "question": "/past_papers/chapter_3/question_1754908207300.png",
+    "answer": "/past_papers/chapter_3/answer_1754908207300.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1754909496908,
+    "title": "embedded system 2",
+    "question": "/past_papers/chapter_3/question_1754909496906.png",
+    "answer": "/past_papers/chapter_3/answer_1754909496907.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1754915032207,
+    "title": "3d printer",
+    "question": "/past_papers/chapter_3/question_1754915031878.png",
+    "answer": "/past_papers/chapter_3/answer_1754915031877.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1755039881390,
+    "title": "microphone.",
+    "question": "/past_papers/chapter_3/question_1755039881386.png",
+    "answer": "/past_papers/chapter_3/answer_1755039881388.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1755040960600,
+    "title": "magnetic storage vs solid state storage",
+    "question": "/past_papers/chapter_3/question_1755040960599.png",
+    "answer": "/past_papers/chapter_3/answer_1755040960599.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1755043403407,
+    "title": "optical disc ",
+    "question": "/past_papers/chapter_3/question_1755043403405.png",
+    "answer": "/past_papers/chapter_3/answer_1755043403406.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1755519130678,
+    "title": "Logic Gates 1",
+    "question": "/past_papers/chapter_3/question_1755519130674.png",
+    "answer": "/past_papers/chapter_3/answer_1755519130675.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1755519328153,
+    "title": "Logic Gates 2",
+    "question": "/past_papers/chapter_3/question_1755519328112.png",
+    "answer": "/past_papers/chapter_3/answer_1755519328112.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1755519440630,
+    "title": "Logic Gates 3",
+    "question": "/past_papers/chapter_3/question_1755519440628.png",
+    "answer": "/past_papers/chapter_3/answer_1755519440629.png",
+    "solution": "omit"
+  },
+  {
+    "id": 1760338206037,
+    "title": "3d printer 2",
+    "question": "/past_papers/chapter_3/question_1760338205945.png",
+    "answer": "/past_papers/chapter_3/answer_1760338205949.png",
+    "markScheme": "• Additive manufacturing\r\n• Uses a digital 3D model or a Computer Aided Design (CAD) (file)\r\n• Builds up the model one layer at a time\r\n• ...starting from the bottom\r\n• ...using x, y and z co-ordinates\r\n• The material is fused / cured together layer by layer \r\nSpecific mark points:\r\nFused Deposition Modelling (FDM)\r\n• Material is heated and pushed through nozzle / extruder\r\nStereolithography (SLA)\r\n• Photosensitive liquid resin is exposed to a UV-laser beam\r\nDigital Light Processing (DLP)\r\n• Uses liquid plastic resin melted with arc lamps\r\nSelective Laser Sintering (SLS)\r\n• Uses a laser to form objects from powdered material"
+  },
+  {
+    "id": 1760338293748,
+    "title": "3d printer 3",
+    "question": "/past_papers/chapter_3/question_1760338293648.png",
+    "answer": "/past_papers/chapter_3/answer_1760338293650.png",
+    "markScheme": "To prevent overheating // ensure material is hot enough\r\n• ...by identifying the temperature of the object (being printed)\r\n• ...by identifying the temperature of the material being used"
+  },
+  {
+    "id": 1760401927721,
+    "title": "laser printer",
+    "question": "/past_papers/chapter_3/question_1760401927481.png",
+    "answer": "/past_papers/chapter_3/answer_1760401927507.png",
+    "markScheme": "The print instructions and data are sent by the laptop to a buffer (at laptop\r\nspeed)\r\n• The data is transferred from the buffer to the printer (at printer speed)\r\n• …allowing user to continue using the laptop // and allowing processor to\r\ncontinue processing\r\n• …instead of waiting for relatively slower printer\r\n• When the buffer is empty an interrupt is sent to the laptop\r\n• …requesting more data"
+  }
+]
